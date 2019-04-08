@@ -1,0 +1,12 @@
+# This still works
+
+
+a = 20 + 5
+b = 6
+c = 5
+d = 8
+e = 9
+f = "YAS"
+print a, b, c
+print "This"
+print f
