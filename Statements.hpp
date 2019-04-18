@@ -83,19 +83,19 @@ class For : public Statement {
 public:
     For();
     For(AssignmentStatement *a1, ExprNode *c, AssignmentStatement *a2, Statements *s);
-    AssignmentStatement *&assign1();
-    ExprNode *&condition();
-    AssignmentStatement *&assign2();
-    Statements *&anotherStatement();
+    AssignmentStatement *&forAssign();
+    ExprNode *&forComp();
+    AssignmentStatement *&forIncrement();
+    Statements *&forBodyStatement();
 
     virtual void evaluate(SymTab &symTab);
     virtual void print();
 
 private:
-    AssignmentStatement *_assign1;
-    ExprNode *_condition;
-    AssignmentStatement *_assign2;
-    Statements * _additional_statement;
+    AssignmentStatement *_forAssign;
+    ExprNode *_forComp;
+    AssignmentStatement *_forIncrement;
+    Statements * _forBodyStatement;
 };
 
 

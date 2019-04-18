@@ -67,13 +67,13 @@ public:
     std::string getName() const                  { return _name; }
     void setName(std::string n) { _name = n; }
 
-    bool isRelOp() const { return _relOp.length() > 0; }
-    std::string getStr() { return _relOp; }
-    void setStr(std::string s) { _relOp = s; }
+//    bool isRelOp() const { return _relOp.length() > 0; }
+//    std::string getStr() { return _relOp; }
+//    void setStr(std::string s) { _relOp = s; }
 
     bool isString() const { return _string.length() > 0; }
-    std::string getWholeString() const { return _string; }
-    void setWholeString(std::string s) { _string = s; _isString = true; }
+    std::string getString() const { return _string; }
+    void setString(std::string s) { _string = s; _isString = true; }
 
 
 

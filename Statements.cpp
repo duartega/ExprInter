@@ -15,7 +15,7 @@ void Statements::addStatement(Statement *statement) { _statements.push_back(stat
 
 AssignmentStatement::AssignmentStatement() : _lhsVariable{""}, _rhsExpression{nullptr} {}
 Print::Print() : _lhsVariable{""}, _rhsExpression{nullptr} {}
-For::For() : _assign1{nullptr}, _condition{nullptr}, _assign2{nullptr}, _additional_statement{nullptr} {}
+For::For() : _forAssign{nullptr}, _forComp{nullptr}, _forIncrement{nullptr}, _forBodyStatement{nullptr} {}
 
 
 
@@ -24,7 +24,7 @@ AssignmentStatement::AssignmentStatement(std::string lhsVar, ExprNode *rhsExpr):
 Print::Print(std::string lhsVar, ExprNode *rhsExpr):
         _lhsVariable{lhsVar}, _rhsExpression{rhsExpr} {}
 For::For(AssignmentStatement *assign1, ExprNode *expr1, AssignmentStatement *assign2, Statements *state):
-        _assign1{assign1}, _condition{expr1}, _assign2{assign2}, _additional_statement{state} {}
+        _forAssign{assign1}, _forComp{expr1}, _forIncrement{assign2}, _forBodyStatement{state} {}
 
 
 std::string &AssignmentStatement::lhsVariable() {
@@ -38,25 +38,33 @@ std::string &Print::lhsVariable() {
 ExprNode *&AssignmentStatement::rhsExpression() {
     return _rhsExpression;
 }
-ExprNode *&For::condition() {
-    return _condition;
-}
+
 ExprNode *&Print::rhsExpression() {
     return _rhsExpression;
 }
 
-AssignmentStatement *&For::assign1() {
-    return _assign1;
+
+AssignmentStatement *&For::forAssign() {
+    return _forAssign;
 }
 
-AssignmentStatement *&For::assign2() {
-    return _assign2;
+ExprNode *&For::forComp() {
+    return _forComp;
 }
 
-Statements *&For::anotherStatement() {
-    return _additional_statement;
+AssignmentStatement *&For::forIncrement() {
+    return _forIncrement;
 }
 
+Statements *&For::forBodyStatement() {
+    return _forBodyStatement;
+}
+
+void For::print() {
+    std::cout << "for i in range ("; _forAssign->print();
+    _forComp->print(); _forIncrement->print();
+    std::cout << "):"; _forBodyStatement->print();
+}
 
 void Statements::print() {
     for (auto s: _statements)
@@ -75,18 +83,18 @@ void Print::print() { // This is a debug print
 
 // This is just for our debugging, this is not for actually printing the values
 // This is left for evaluate
-void For::print() {
-    std::cout << "for (";
-    _assign1->print(); std::cout << "; ";
-    _condition->print(); std::cout << "; ";
-    _assign2->print();
-    std::cout << ")";
-    std::cout << "{";
-    std::cout << std::endl;
-    _additional_statement->print();
-    std::cout << "}";
-    std::cout << std::endl;
-}
+//void For::print() {
+//    std::cout << "for (";
+//    _assign1->print(); std::cout << "; ";
+//    _condition->print(); std::cout << "; ";
+//    _assign2->print();
+//    std::cout << ")";
+//    std::cout << "{";
+//    std::cout << std::endl;
+//    _additional_statement->print();
+//    std::cout << "}";
+//    std::cout << std::endl;
+//}
 
 void Statements::evaluate(SymTab &symTab) {
     for (auto s: _statements) {
@@ -95,17 +103,17 @@ void Statements::evaluate(SymTab &symTab) {
     }
 }
 void For::evaluate(SymTab &symTab) {
-    int a1 = assign1()->rhsExpression()->evaluate(symTab);
-    symTab.setValueFor(assign1()->lhsVariable(), a1);
+    int a1 = forAssign()->rhsExpression()->evaluate(symTab);
+    symTab.setValueFor(forAssign()->lhsVariable(), a1);
 
-    int condit = condition()->evaluate(symTab);
+    int condit = forComp()->evaluate(symTab);
 
     // Still need to fix this
     while (condit == 1) {
-        int a2 = assign2()->rhsExpression()->evaluate(symTab);
-        symTab.setValueFor(assign2()->lhsVariable(), a2);
-        condit = condition()->evaluate(symTab);
-        anotherStatement()->evaluate(symTab);
+        int a2 = forIncrement()->rhsExpression()->evaluate(symTab);
+        symTab.setValueFor(forIncrement()->lhsVariable(), a2);
+        condit = forComp()->evaluate(symTab);
+        forBodyStatement()->evaluate(symTab);
     }
 }
 void AssignmentStatement::evaluate(SymTab &symTab) {
@@ -118,7 +126,7 @@ void AssignmentStatement::evaluate(SymTab &symTab) {
         int rhs = rhsExpression()->evaluate(symTab);
         symTab.setValueFor(lhsVariable(), rhs);
     } else if (rhsString) { // Assign a string
-        std::string rhs = rhsExpression()->token().getWholeString();
+        std::string rhs = rhsExpression()->token().getString();
         symTab.setValueFor(lhsVariable(), rhs);
     } else if (rhsExpression()->evaluate(symTab)) { // So we can add inline
         symTab.setValueFor(lhsVariable(), rhsExpression()->evaluate(symTab));

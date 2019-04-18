@@ -21,7 +21,7 @@ public:
     Print *printStatement();
     For *forStatement();
 
-    ExprNode *compOP();
+    ExprNode *compOp();
     ExprNode *relTerm();
     ExprNode *expr();
     ExprNode *term();
@@ -31,6 +31,8 @@ public:
     ExprNode *or_test();
     ExprNode *and_test();
     ExprNode *not_test();
+    ExprNode *bool_test();
+
 
     std::string id();
 

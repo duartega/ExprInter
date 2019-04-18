@@ -20,8 +20,8 @@ ExprNode *&InfixExprNode::left() { return _left; }
 ExprNode *&InfixExprNode::right() { return _right; }
 
 std::string InfixExprNode::evaluateString(SymTab &symTab) {
-    auto lValue = left()->token().getWholeString().c_str();
-    auto rValue = right()->token().getWholeString().c_str();
+    auto lValue = left()->token().getString().c_str();
+    auto rValue = right()->token().getString().c_str();
     if( token().isAdditionOperator() )
         return lValue;
 }
@@ -55,8 +55,10 @@ int InfixExprNode::evaluate(SymTab &symTab) {
         return lValue == rValue;
     else if( token().isNotEqualOperator())
         return lValue != rValue;
-        else if ( token().isComma() )
-            return rValue;
+        else if ( token().isComma() ){
+        std::cout << "RVAL: " << rValue << '\n';
+        return rValue;
+    }
     else {
         std::cout << "InfixExprNode::evaluate: don't know how to evaluate this operator\n";
         token().print();
@@ -82,7 +84,7 @@ int WholeNumber::evaluate(SymTab &symTab) {
 }
 
 std::string WholeNumber::evaluateString(SymTab &symTab) {
-    return token().getWholeString();
+    return token().getString();
 }
 
 Variable::Variable(Token token): ExprNode{token} {}

@@ -69,7 +69,7 @@ AssignmentStatement *Parser::assignStatement() {
     if (!assignOp.isAssignmentOperator())
         die("Parser::assignStatement", "Expected an equal sign, instead got", assignOp);
 
-    ExprNode *rightHandSideExpr = compOP();
+    ExprNode *rightHandSideExpr = compOp();
 
     // if we are assigning a string then we need to catch the quotes
     Token quotes = tokenizer.getToken();
@@ -144,7 +144,7 @@ ExprNode *Parser::and_test() {
 ExprNode *Parser::not_test() {
     // This function parses the grammar rules:
     // <not_test> -> <comparison>
-    ExprNode *rightHandSideExpr = compOP();
+    ExprNode *rightHandSideExpr = compOp();
 }
 
 For *Parser::forStatement() {
@@ -213,7 +213,7 @@ For *Parser::forStatement() {
     return new For(assign1, condition, assign2, stmt);
 }
 
-ExprNode *Parser::compOP() {
+ExprNode *Parser::compOp() {
     // This function parses the grammar rules:
     // <relExpr> -> <rel-term> { (==, !=) <rel-term> }
     ExprNode *left = expr();
@@ -307,7 +307,7 @@ ExprNode *Parser::primary() {
     else if( tok.isName() || tok.isQuotations() || tok.isSingleQuote())
         return new Variable(tok);
     else if (tok.isOpenParen()) {
-        ExprNode *p = compOP();
+        ExprNode *p = compOp();
         Token token = tokenizer.getToken();
 
         if (!token.isCloseParen())
@@ -316,7 +316,7 @@ ExprNode *Parser::primary() {
     }
     else if (tok.isRelationalOperator())
     {
-        ExprNode *p = compOP();
+        ExprNode *p = compOp();
         Token token = tokenizer.getToken();
         return p;
     }
