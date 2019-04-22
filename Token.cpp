@@ -30,7 +30,7 @@ void Token::print() const {
     else if( isLte() ) std::cout << " <= ";
     else if ( isOpenBrace() ) std::cout << " {";
     else if ( isCloseBrace() ) std::cout << "} ";
-    else if ( isString() ) std::cout << getWholeString();
+    else if ( isString() ) std::cout << getString();
     else if ( isComma() ) std::cout << " , ";
     //else if( isKeyword() ) std::cout << getKeyword();
     else std::cout << "Token not in Token.cpp.\n";

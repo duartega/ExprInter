@@ -125,17 +125,17 @@ Token Tokenizer::getToken() {
         // --------- and will never match the "=" in ">="
     else if ( c == '>' || c == '<' ) {
         inStream.putback(c);
-        token.setStr( relOp() );
+        token.setString( relOp() );
     }
     else if (c == '!') {
 
         inStream.putback(c);
-        token.setStr( relOp() );
+        token.setString( relOp() );
     }
 
     else if( c == '=' ) {
         inStream.putback(c);
-        token.setStr(relOp());
+        token.setString(relOp());
         token.symbol(c);
     }
     else if ( c == ',' )
@@ -149,7 +149,7 @@ Token Tokenizer::getToken() {
     else if(c == '{' || c == '}')
         token.symbol(c);
     else if( c == '"' || c == '\''){
-        token.setWholeString( readString(c) );
+        token.setString( readString(c) );
         token.symbol(c);
     }
     else if(isalpha(c)) {  // an identifier?

@@ -168,7 +168,7 @@ For *Parser::forStatement() {
     if (!newLine.eol())
         die("Parser::ForStatement", "Expected a new line token after first assignment, instead got", newLine);
 
-    ExprNode *condition = compOP();
+    ExprNode *condition = compOp();
 
     Token semiColon1 = tokenizer.getToken();
     if (!semiColon1.isSemiColon())
