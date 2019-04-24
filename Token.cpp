@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Token.hpp"
 
-Token::Token(): _name{""}, _eof{false}, _eol{false}, _symbol{'\0'}, _isWholeNumber{false} , _relOp{""}, _keyword{""},
+Token::Token(): _name{""}, _eof{false}, _eol{false}, _symbol{'\0'}, _isWholeNumber{false} , _compOp{""}, _keyword{""},
  _isString{false}, _string{""} {}
 
 void Token::print() const {
@@ -24,10 +24,10 @@ void Token::print() const {
     else if( isWholeNumber() ) std::cout << getWholeNumber();
     else if( isEqualOperator() ) std::cout << " == ";
     else if( isNotEqualOperator() ) std::cout << " != ";
-    else if( isGt() ) std::cout << " > ";
-    else if( isGte() ) std::cout << " >= ";
-    else if( isLt() ) std::cout << " < ";
-    else if( isLte() ) std::cout << " <= ";
+    else if( isGreaterThan() ) std::cout << " > ";
+    else if( isGreaterThanEqual() ) std::cout << " >= ";
+    else if( isLessThan() ) std::cout << " < ";
+    else if( isLessThanEqual() ) std::cout << " <= ";
     else if ( isOpenBrace() ) std::cout << " {";
     else if ( isCloseBrace() ) std::cout << "} ";
     else if ( isString() ) std::cout << getString();

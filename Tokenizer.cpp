@@ -100,32 +100,36 @@ Token Tokenizer::getToken() {
                 break;
             }
         }
-
     } else if( isdigit(c) ) { // a integer?
         // put the digit back into the input stream so
         // we read the entire number in a function
         inStream.putback(c);
-        token.setWholeNumber( readInteger() );
-
-    }
-        // --------- This needs to be modified because right now it only check on char
-        // --------- and will never match the "=" in ">="
-    else if ( c == '>' || c == '<' ) {
-        inStream.putback(c);
-        token.setString( relOp() );
-    }
-    else if (c == '!') {
-
-        inStream.putback(c);
-        token.setString( relOp() );
-    }
-
-    else if( c == '=' ) {
-        inStream.putback(c);
-        token.setString(relOp());
-        token.symbol(c);
-    }
-    else if ( c == ',' )
+        token.setWholeNumber(readInteger());
+    } else if ( c == '>') {
+        if(inStream.peek() == '=') {
+            inStream.get(c);
+            token.compOp(">=");
+        } else
+            token.compOp(">");
+    } else if (c == '<') {
+        if(inStream.peek() == '=') {
+            inStream.get(c);
+            token.compOp("<=");
+        } else
+            token.compOp("<");
+    } else if (c == '!') {
+        if(inStream.peek() == '=') {
+            inStream.get(c);
+            token.compOp("!=");
+        } else
+            token.compOp("!");
+    } else if( c == '=' ) {
+        if(inStream.peek() == '=') {
+            inStream.get(c);
+            token.compOp("!=");
+        } else
+            token.compOp("=");
+    } else if ( c == ',' )
         token.symbol(c);
     else if( c == '+' || c == '-' || c == '*' || c == '/' || c == '%')
         token.symbol(c);

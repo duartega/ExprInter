@@ -218,7 +218,8 @@ ExprNode *Parser::compOp() {
     // <relExpr> -> <rel-term> { (==, !=) <rel-term> }
     ExprNode *left = expr();
     Token tok = tokenizer.getToken();
-    while (tok.isEqualOperator() || tok.isNotEqualOperator() || tok.isGt() || tok.isGte() || tok.isLt() || tok.isLte())
+    while (tok.isEqualOperator() || tok.isNotEqualOperator() || tok.isGreaterThan() ||
+                                    tok.isGreaterThanEqual() || tok.isLessThan() || tok.isLessThanEqual())
     {
         InfixExprNode *p = new InfixExprNode(tok);
         p->left() = left;
@@ -230,23 +231,6 @@ ExprNode *Parser::compOp() {
     return left;
 }
 
-//ExprNode *Parser::relTerm() {
-//    // This function parses the grammar rules:
-//
-//    // <relTerm> -> <rel-Primary> { (>, >=, <, <=) <rel-Primary> }
-//    ExprNode *left = expr();
-//    Token tok = tokenizer.getToken();
-//    while (tok.isGt() || tok.isGte() || tok.isLt() || tok.isLte() || tok.isEqualOperator() || tok.isNotEqualOperator())
-//    {
-//        InfixExprNode *p = new InfixExprNode(tok);
-//        p->left() = left;
-//        p->right() = expr();
-//        left = p;
-//        tok = tokenizer.getToken();
-//    }
-//    tokenizer.ungetToken();
-//    return left;
-//}
 
 ExprNode *Parser::expr() {
     // This function parses the grammar rules:
@@ -314,7 +298,7 @@ ExprNode *Parser::primary() {
             die("Parser::primary", "Expected close-parenthesis, instead got", token);
         return p;
     }
-    else if (tok.isRelationalOperator())
+    else if (tok.isComparisonOperator())
     {
         ExprNode *p = compOp();
         Token token = tokenizer.getToken();

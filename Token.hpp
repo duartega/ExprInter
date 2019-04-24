@@ -29,31 +29,30 @@ public:
     void symbol(char c) { _symbol = c; }
     char symbol() { return _symbol; }
 
+    void compOp(std::string s) { _compOp = s; }
+    std::string compOp() { return _compOp; }
 
-    bool isSemiColon() const { return _symbol == ';'; }
-    bool isAssignmentOperator() const              { return _symbol == '='; }
+    bool isSemiColon() const              { return _symbol == ';'; }
+    bool isAssignmentOperator() const     { return _symbol == '='; }
     bool isMultiplicationOperator() const { return _symbol == '*'; }
     bool isAdditionOperator() const       { return _symbol == '+'; }
     bool isSubtractionOperator() const    { return _symbol == '-'; }
     bool isModuloOperator() const         { return _symbol == '%'; }
     bool isDivisionOperator() const       { return _symbol == '/'; }
-
-    bool isEqualOperator() const          { return _relOp == "==";}
-    bool isNotEqualOperator() const          { return _relOp == "!=";}
-    bool isGt() const  { return _relOp == ">"; }
-    bool isGte() const  { return _relOp == ">="; }
-    bool isLt() const  { return _relOp == "<"; }
-    bool isLte() const  { return _relOp == "<="; }
-
-    bool isComma() const { return _symbol == ','; }
-
+    bool isEqualOperator() const          { return _compOp == "==";}
+    bool isNotEqualOperator() const       { return _compOp == "!=";}
+    bool isGreaterThan() const            { return _compOp == ">"; }
+    bool isGreaterThanEqual() const       { return _compOp == ">="; }
+    bool isLessThan() const               { return _compOp == "<"; }
+    bool isLessThanEqual() const          { return _compOp == "<="; }
+    bool isComma() const                  { return _symbol == ','; }
     bool isQuotations() const { return _symbol == '"'; }
     bool isSingleQuote() const { return _symbol == '\''; }
     bool isCommentSymbol() const { return _symbol == '#'; }
 
 
-    bool isRelationalOperator() const {
-        return isGt() || isGte() || isLt() || isLte();
+    bool isComparisonOperator() const {
+        return isGreaterThan() || isGreaterThanEqual() || isLessThan() || isLessThanEqual();
     }
 
     bool isArithmeticOperator() const {
@@ -67,9 +66,6 @@ public:
     std::string getName() const                  { return _name; }
     void setName(std::string n) { _name = n; }
 
-//    bool isRelOp() const { return _relOp.length() > 0; }
-//    std::string getStr() { return _relOp; }
-//    void setStr(std::string s) { _relOp = s; }
 
     bool isString() const { return _string.length() > 0; }
     std::string getString() const { return _string; }
@@ -99,7 +95,7 @@ private:
     bool _isWholeNumber;
     bool _isString;
     char _symbol;
-    std::string _relOp;
+    std::string _compOp;
     int _wholeNumber;
     std::string _keyword;
     std::string _string;
