@@ -23,29 +23,18 @@ std::string Tokenizer::readName() {
     return name;
 }
 
-std::string Tokenizer::readString(char original_token) {
+std::string Tokenizer::readString(char quote) {
     // This function is called when it is known that
-    // the first character in input is an alphabetic character.
-    // The function reads and returns all characters of the name.
+    // we have a string since we have encountered either a single
+    // or double quote. Now, we need to read in the full string.
+    // We stop when we reach the matching quote mark.
 
     std::string stringValue;
     char c;
-    while(inStream.get(c) && c != original_token){
+    while(inStream.get(c) && c != quote){
         stringValue += c;
     }
     return stringValue;
-
-}
-
-
-std::string Tokenizer::relOp() {
-    std::string relOp;
-    char c;
-    while ( inStream.get(c) && !isspace(c) )
-        relOp += c;
-    if(inStream.good())  // In the loop, we have read one char too many.
-        inStream.putback(c);
-    return relOp;
 }
 
 int Tokenizer::readInteger() {
@@ -61,6 +50,16 @@ int Tokenizer::readInteger() {
     if(inStream.good())  // In the loop, we have read one char too many.
         inStream.putback(c);
     return intValue;
+}
+
+std::string Tokenizer::relOp() {
+    std::string relOp;
+    char c;
+    while ( inStream.get(c) && !isspace(c) )
+        relOp += c;
+    if(inStream.good())  // In the loop, we have read one char too many.
+        inStream.putback(c);
+    return relOp;
 }
 
 Tokenizer::Tokenizer(std::ifstream &stream): ungottenToken{false}, inStream{stream}, lastToken{} {}
@@ -83,21 +82,9 @@ Token Tokenizer::getToken() {
         exit(1);
     }
     if (c == '#') {
-        while(inStream.get(c))
-        {
-            if (c == '\n')
-            {
-                inStream.get(c);
-                if (c == '\n'){
-                    inStream.putback(c);
-                    continue;
-                }
-                if (c != '#')
-                    break;
-            }
-        }
+        while(inStream.get(c) && c != '\n')
+            ;
     }
-
 
     Token token;
     if( inStream.eof()) {
