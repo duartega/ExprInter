@@ -1,5 +1,5 @@
 //
-// Created by Gabriel Duarte on 1/30/19.
+// Created by Ali A. Kooshesh on 1/30/19.
 //
 
 #ifndef EXPRINTER_TOKEN_HPP
@@ -17,43 +17,43 @@ public:
     bool eof() const { return _eof; }
     bool eol() const  { return _eol; }
 
-    bool isOpenParen() const  { return _symbol == '('; }
-    bool isCloseParen() const { return _symbol == ')'; }
-    bool isOpenBrace() const { return _symbol == '{'; }
-    bool isCloseBrace() const { return _symbol == '}'; }
+    bool isOpenParen() const  { return _symbol == "("; }
+    bool isCloseParen() const { return _symbol == ")"; }
+    bool isOpenCurlyBrace() const {return _symbol == "{";}
+    bool isCloseCurlyBrace() const {return _symbol == "}";}
 
-
-    bool isForLoop() const {return _name == "for";}
-    bool isPrint() const {return _name == "print";}
-
+    void symbol(std::string s) { _symbol = s; }
     void symbol(char c) { _symbol = c; }
-    char symbol() { return _symbol; }
+    std::string symbol() { return _symbol; }
 
-
-    bool isSemiColon() const { return _symbol == ';'; }
-    bool isAssignmentOperator() const              { return _symbol == '='; }
-    bool isMultiplicationOperator() const { return _symbol == '*'; }
-    bool isAdditionOperator() const       { return _symbol == '+'; }
-    bool isSubtractionOperator() const    { return _symbol == '-'; }
-    bool isModuloOperator() const         { return _symbol == '%'; }
-    bool isDivisionOperator() const       { return _symbol == '/'; }
-
-    bool isEqualOperator() const          { return _relOp == "==";}
-    bool isNotEqualOperator() const          { return _relOp == "!=";}
-    bool isGt() const  { return _relOp == ">"; }
-    bool isGte() const  { return _relOp == ">="; }
-    bool isLt() const  { return _relOp == "<"; }
-    bool isLte() const  { return _relOp == "<="; }
-
-    bool isComma() const { return _symbol == ','; }
-
-    bool isQuotations() const { return _symbol == '"'; }
-    bool isSingleQuote() const { return _symbol == '\''; }
-    bool isCommentSymbol() const { return _symbol == '#'; }
-
-
-    bool isRelationalOperator() const {
-        return isGt() || isGte() || isLt() || isLte();
+    bool isSemiColon() const { return _symbol == ";"; }
+    bool isAssignmentOperator() const              { return _symbol == "="; }
+    bool isMultiplicationOperator() const { return _symbol == "*"; }
+    bool isAdditionOperator() const       { return _symbol == "+"; }
+    bool isSubtractionOperator() const    { return _symbol == "-"; }
+    bool isModuloOperator() const         { return _symbol == "%"; }
+    bool isDivisionOperator() const       { return _symbol == "/"; }
+    bool isGreaterThanOperator() const {return _symbol == ">";}
+    bool isGreaterThanEqualOperator() const {return _symbol == ">=";}
+    bool isLessThanOperator() const {return _symbol == "<";}
+    bool isLessThanEqualOperator() const {return _symbol == "<=";}
+    bool isComparisonOperator() const {return _symbol == "==";}
+    bool isExclamComparisonOperator() const {return _symbol == "!=";}
+    bool isDoubleQuote() const {return _symbol == "\"";}
+    bool isSingleQuote() const {return _symbol == "\'";}
+    bool isIndent() const {return _is_indent; }
+    bool isDedent() const {return _is_dedent; }
+    bool isComma() const {return _symbol == ",";}
+    bool isColon() const {return _symbol == ":";}
+    bool isOpenSquareBracket() const {return _symbol == "[";}
+    bool isCloseSquareBracket() const {return _symbol == "]";}
+    bool isAnd() const {return _name == "and";}
+    bool isOr() const {return _name == "or";}
+    bool isNot() const {return _name == "not";}
+    bool isKeyword() const
+    {
+        return _name == "for" || _name == "print" || _name == "if" || _name == "else" ||
+               _name == "elif" || _name == "False" || _name == "True" || _name == "def" || _name == "return";
     }
 
     bool isArithmeticOperator() const {
@@ -67,22 +67,6 @@ public:
     std::string getName() const                  { return _name; }
     void setName(std::string n) { _name = n; }
 
-//    bool isRelOp() const { return _relOp.length() > 0; }
-//    std::string getStr() { return _relOp; }
-//    void setStr(std::string s) { _relOp = s; }
-
-    bool isString() const { return _string.length() > 0; }
-    std::string getString() const { return _string; }
-    void setString(std::string s) { _string = s; _isString = true; }
-
-
-
-
-    bool isKeyword() const{
-        return isForLoop() || isPrint();
-    }
-
-
     bool &isWholeNumber() { return _isWholeNumber; }
     bool isWholeNumber() const { return _isWholeNumber; }
     int getWholeNumber() const { return _wholeNumber; }
@@ -91,19 +75,18 @@ public:
         isWholeNumber() = true;
     }
 
+    void set_indent() { _is_indent = true;}
+    void set_dedent() { _is_dedent = true; }
+
     void print() const;
 
 private:
     std::string _name;
     bool _eof, _eol;
     bool _isWholeNumber;
-    bool _isString;
-    char _symbol;
-    std::string _relOp;
+    std::string _symbol;
     int _wholeNumber;
-    std::string _keyword;
-    std::string _string;
-
+    bool _is_dedent, _is_indent;
 };
 
 #endif //EXPRINTER_TOKEN_HPP

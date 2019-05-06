@@ -1,159 +1,197 @@
 //
-// Created by Gabriel Duarte on 3/25/19.
+// Created by Ali A. Kooshesh on 2/5/19.
 //
 
 #include "Statements.hpp"
-#include "Tokenizer.hpp"
-#include "SymTab.hpp"
-#include <map>
 
+// Statement
 Statement::Statement() {}
+
+// Statements
 
 Statements::Statements() {}
 void Statements::addStatement(Statement *statement) { _statements.push_back(statement); }
 
+void Statements::print() {
+    for (auto s: _statements) {
+        s->print();
+        std::cout << std::endl;
+    }
+}
+
+void Statements::evaluate(SymTab &symTab) {
+    for (auto s: _statements)
+        s->evaluate(symTab);
+}
+
+/*
+ * Assignment Statement
+ */
 
 AssignmentStatement::AssignmentStatement() : _lhsVariable{""}, _rhsExpression{nullptr} {}
-Print::Print() : _lhsVariable{""}, _rhsExpression{nullptr} {}
-For::For() : _forAssign{nullptr}, _forComp{nullptr}, _forIncrement{nullptr}, _forBodyStatement{nullptr} {}
+AssignmentStatement::AssignmentStatement(std::string lhsVar, ExprNode *rhsExpr): _lhsVariable{lhsVar}, _rhsExpression{rhsExpr} {}
 
-
-
-AssignmentStatement::AssignmentStatement(std::string lhsVar, ExprNode *rhsExpr):
-        _lhsVariable{lhsVar}, _rhsExpression{rhsExpr} {}
-Print::Print(std::string lhsVar, ExprNode *rhsExpr):
-        _lhsVariable{lhsVar}, _rhsExpression{rhsExpr} {}
-For::For(AssignmentStatement *assign1, ExprNode *expr1, AssignmentStatement *assign2, Statements *state):
-        _forAssign{assign1}, _forComp{expr1}, _forIncrement{assign2}, _forBodyStatement{state} {}
-
+void AssignmentStatement::evaluate(SymTab &symTab) {
+    TypeDescriptor rhs = rhsExpression()->evaluate(symTab);
+    symTab.setValueFor(lhsVariable(), rhs);
+}
 
 std::string &AssignmentStatement::lhsVariable() {
     return _lhsVariable;
 }
-std::string &Print::lhsVariable() {
-    return _lhsVariable;
-}
-
 
 ExprNode *&AssignmentStatement::rhsExpression() {
     return _rhsExpression;
 }
 
-ExprNode *&Print::rhsExpression() {
-    return _rhsExpression;
-}
-
-
-AssignmentStatement *&For::forAssign() {
-    return _forAssign;
-}
-
-ExprNode *&For::forComp() {
-    return _forComp;
-}
-
-AssignmentStatement *&For::forIncrement() {
-    return _forIncrement;
-}
-
-Statements *&For::forBodyStatement() {
-    return _forBodyStatement;
-}
-
-void For::print() {
-    std::cout << "for i in range ("; _forAssign->print();
-    _forComp->print(); _forIncrement->print();
-    std::cout << "):"; _forBodyStatement->print();
-}
-
-void Statements::print() {
-    for (auto s: _statements)
-        s->print();
-}
 void AssignmentStatement::print() {
     std::cout << _lhsVariable << " = ";
     _rhsExpression->print();
-    std::cout << std::endl;
 }
-void Print::print() { // This is a debug print
-    std::cout << _lhsVariable << " ";
-    _rhsExpression->print();
+
+/*
+ * Function Definition
+ */
+
+FunctionDef::FunctionDef() : _functionName{}, _args{nullptr}, _stmt{nullptr} {}
+FunctionDef::FunctionDef(Token funcName, Arguments*, Statements*) : _functionName{}, _args{}, _stmt{} {}
+
+
+Arguments* FunctionDef::Args() {
+    return _args;
+}
+
+void FunctionDef::evaluate(SymTab &symTab) {
+
+    auto v = _args->args();
+    for (unsigned i = 0; i < v->size(); i++) {
+        ExprNode* e = v->at(i);
+        TypeDescriptor res = e->evaluate(symTab);
+    }
     std::cout << std::endl;
 }
 
-// This is just for our debugging, this is not for actually printing the values
-// This is left for evaluate
-//void For::print() {
-//    std::cout << "for (";
-//    _assign1->print(); std::cout << "; ";
-//    _condition->print(); std::cout << "; ";
-//    _assign2->print();
-//    std::cout << ")";
-//    std::cout << "{";
-//    std::cout << std::endl;
-//    _additional_statement->print();
-//    std::cout << "}";
-//    std::cout << std::endl;
-//}
+void FunctionDef::print() {
+    std::cout << "def ";
+    std::cout << _functionName.getName();
+    _stmt->print();
+}
 
-void Statements::evaluate(SymTab &symTab) {
-    for (auto s: _statements) {
-        s->evaluate(symTab);
+/*
+ * Print Statement
+ */
+
+PrintStatement::PrintStatement() : _items{nullptr} {}
+PrintStatement::PrintStatement(Arguments* v) : _items{v} {}
+
+Arguments* PrintStatement::Items() {
+    return _items;
+}
+
+void PrintStatement::evaluate(SymTab &symTab) {
+    auto v = _items->args();
+    for (unsigned i = 0; i < v->size(); i++) {
+        ExprNode* e = v->at(i);
+        TypeDescriptor res = e->evaluate(symTab);
+        res.print();
+        std::cout << " ";
+    }
+    std::cout << std::endl;
+}
+
+void PrintStatement::print() {
+    std::cout << "print ";
+    _items->print();
+}
+
+/*
+ * For Statement
+ */
+
+ForStatement::ForStatement(): _var{nullptr}, _range{nullptr}, _stmts{nullptr} {}
+ForStatement::ForStatement(Variable* var, Range* r, Statements* stmts): _var{var}, _range{r}, _stmts{stmts} {}
+
+void ForStatement::evaluate(SymTab &symTab) {
+    int i;
+
+    _range->begin(symTab);
+    while (!_range->done()) {
+        i = _range->next();
+        symTab.setValueFor(_var->token().getName(), i);
+        _stmts->evaluate(symTab);
+    }
+}
+
+void ForStatement::print() {
+    std::cout << "for ";
+    _var->print();
+    std::cout << " in ";
+    _range->print();
+    std::cout << std::endl;
+    std::cout << "-----\n";
+    _stmts->print();
+    std::cout << "-----";
+}
+
+
+IfStatement::IfStatement(): _cond{nullptr}, _stmts{nullptr}, got_evald{false} {}
+IfStatement::IfStatement(ExprNode *condition, Statements *statements): _cond{condition}, _stmts{statements}, got_evald{false} {}
+
+void IfStatement::evaluate(SymTab &symTab) {
+    TypeDescriptor res = _cond->evaluate(symTab);
+    if (res.get_type() != TypeDescriptor::BOOLEAN) {
+        std::cout << "Non boolean value in if statement: ";
+        res.print();
         std::cout << std::endl;
+        exit(4);
+    }
+    if (res.get_bvalue()) {
+        _stmts->evaluate(symTab);
+        got_evald = true;
+    } else {
+        got_evald = false;
     }
 }
-void For::evaluate(SymTab &symTab) {
-    int a1 = forAssign()->rhsExpression()->evaluate(symTab);
-    symTab.setValueFor(forAssign()->lhsVariable(), a1);
 
-    int condit = forComp()->evaluate(symTab);
+void IfStatement::print() {
+    std::cout << "if ";
+    _cond->print();
+    std::cout << ":\n-----\n";
+    _stmts->print();
+    std::cout << "-----";
+}
 
-    // Still need to fix this
-    while (condit == 1) {
-        int a2 = forIncrement()->rhsExpression()->evaluate(symTab);
-        symTab.setValueFor(forIncrement()->lhsVariable(), a2);
-        condit = forComp()->evaluate(symTab);
-        forBodyStatement()->evaluate(symTab);
+IfElseStatement::IfElseStatement(): _ifs{nullptr}, _else{nullptr} {}
+IfElseStatement::IfElseStatement(std::vector<IfStatement *> *ifs, Statements *p_else): _ifs{ifs}, _else{p_else} {}
+
+void IfElseStatement::evaluate(SymTab &symTab) {
+    bool ignore_else = false;
+    for (unsigned i = 0; i < _ifs->size(); i++) {
+        auto p = _ifs->at(i);
+        p->evaluate(symTab);
+        if (p->got_evaluated()) {
+            ignore_else = true;
+            break;
+        }
+    }
+    if (!ignore_else) {
+        if (_else) {
+            _else->evaluate(symTab);
+        }
     }
 }
-void AssignmentStatement::evaluate(SymTab &symTab) {
 
-    // We are checking to see what kind of assignment we want to do
-    bool rhsInt = rhsExpression()->token().isWholeNumber();
-    bool rhsString = rhsExpression()->token().isString();
-
-    if (rhsInt) { // Assign an int
-        int rhs = rhsExpression()->evaluate(symTab);
-        symTab.setValueFor(lhsVariable(), rhs);
-    } else if (rhsString) { // Assign a string
-        std::string rhs = rhsExpression()->token().getString();
-        symTab.setValueFor(lhsVariable(), rhs);
-    } else if (rhsExpression()->evaluate(symTab)) { // So we can add inline
-        symTab.setValueFor(lhsVariable(), rhsExpression()->evaluate(symTab));
-    } else if (rhsExpression()->token().isArithmeticOperator()) // So we can add inline
-        symTab.setValueFor(lhsVariable(), rhsExpression()->evaluateString(symTab));
-
-}
-void Print::evaluate(SymTab &symTab) {
-    std::cout << "----------\n";
-    std::cout << "|PRINTING|\n";
-    std::cout << "----------\n";
-
-    if( rhsExpression()->token().isString()) { // print "a ="
-        rhsExpression()->print(); // because we didn't store "a ="
-    }  else  if(rhsExpression()->token().isComma()) // prints test list
-        rhsExpression()->evaluate(symTab);
-    else {
-        // Get value of a single print variable
-        auto valOfToken = symTab.getValueFor(rhsExpression()->token().getName());
-        StringDescriptor *stringCast = dynamic_cast<StringDescriptor *> (valOfToken);
-        if (stringCast != nullptr)
-            std::cout << stringCast->stringValue;
-        IntegerDescriptor *integerCast = dynamic_cast<IntegerDescriptor *> (valOfToken);
-        if (integerCast != nullptr)
-            std::cout << integerCast->value.intValue;
-        return;
+void IfElseStatement::print() {
+    for (unsigned i = 0; i < _ifs->size(); i++) {
+        auto p = _ifs->at(i);
+        if (i != 0) {
+            std::cout << "el";
+        }
+        p->print();
     }
-
-
+    if (_else) {
+        std::cout << "\nelse: \n-----\n";
+        _else->print();
+        std::cout << "-----";
+    }
 }

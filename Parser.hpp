@@ -5,8 +5,10 @@
 #include "Token.hpp"
 #include "Tokenizer.hpp"
 #include "SymTab.hpp"
-#include "ArithExpr.hpp"
+#include "Expr.hpp"
 #include "Statements.hpp"
+#include "Array.cpp"
+
 #include<vector>
 #include<iostream>
 #include<map>
@@ -17,22 +19,22 @@ public:
     Parser(Tokenizer &tokenizer) : tokenizer{tokenizer} {}
 
     Statements *statements();
+
     AssignmentStatement *assignStatement();
-    Print *printStatement();
-    For *forStatement();
+    PrintStatement *printStatement();
+    ForStatement* forStatement();
+    IfElseStatement* ifElseStatement();
+    FunctionDef* functionDef();
 
-    ExprNode *compOp();
-    ExprNode *relTerm();
-    ExprNode *expr();
-    ExprNode *term();
-    ExprNode *primary();
-    ExprNode *testList();
-    ExprNode *test();
-    ExprNode *or_test();
-    ExprNode *and_test();
-    ExprNode *not_test();
-    ExprNode *bool_test();
+    ExprNode *rel_expr();
+    ExprNode *rel_term();
+    ExprNode *rel_primary();
 
+    ExprNode *arith_expr();
+    ExprNode *arith_term();
+    ExprNode *arith_primary();
+
+    Arguments* arguments();
 
     std::string id();
 

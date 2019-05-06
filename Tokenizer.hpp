@@ -16,7 +16,8 @@ public:
     Tokenizer(std::ifstream &inStream);
     Token getToken();
     void ungetToken();
-  void printProcessedTokens();
+    void printProcessedTokens();
+    std::string read_string();
 
 private:
     Token lastToken;
@@ -26,9 +27,10 @@ private:
 
 private:
     std::string readName();
-    std::string readString(char c);
     int readInteger();
-    std::string relOp();
+    std::vector<int> indents;
+    bool line_begin;
+    int prepared_dedents;
 };
 
 #endif //EXPRINTER_TOKENIZER_HPP

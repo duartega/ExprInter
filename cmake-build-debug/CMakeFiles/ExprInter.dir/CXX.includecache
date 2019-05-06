@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Elliot/CLionProjects/ExprInter/SymTab.cpp
+iostream
+-
+stack
+-
+iomanip
+-
+vector
+-
+SymTab.hpp
+C:/Users/Elliot/CLionProjects/ExprInter/SymTab.hpp
+
+C:/Users/Elliot/CLionProjects/ExprInter/SymTab.hpp
+string
+-
+map
+-
+stack
+-
+TypeDescriptor.cpp
+C:/Users/Elliot/CLionProjects/ExprInter/TypeDescriptor.cpp
+
+C:/Users/Elliot/CLionProjects/ExprInter/TypeDescriptor.cpp
+string
+-
+iostream
+-
+vector
+-
+

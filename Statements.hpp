@@ -8,8 +8,10 @@
 #include <iostream>
 #include <vector>
 
-#include "ArithExpr.hpp"
+#include "Expr.hpp"
 #include "SymTab.hpp"
+#include "Arguments.cpp"
+#include "Range.cpp"
 
 // The Statement (abstract) class serves as a super class for all statements that
 // are defined in the language. Ultimately, statements have to be evaluated.
@@ -23,7 +25,6 @@ public:
 
     virtual void print() = 0;
     virtual void evaluate(SymTab &symTab) = 0;
-
 };
 
 
@@ -36,7 +37,6 @@ public:
 
     void addStatement(Statement *statement);
     void evaluate(SymTab &symTab);
-
     void print();
 
 private:
@@ -62,42 +62,87 @@ private:
     ExprNode *_rhsExpression;
 };
 
-class Print : public Statement {
+class PrintStatement: public Statement
+{
 public:
-    Print();
-    Print(std::string lhsVar, ExprNode *rhsExpr);
+    PrintStatement();
+    PrintStatement(Arguments*);
 
-    std::string &lhsVariable();
-    ExprNode *&rhsExpression();
+    Arguments* Items();
 
     virtual void evaluate(SymTab &symTab);
     virtual void print();
 
 private:
-    std::string _lhsVariable;
-    ExprNode *_rhsExpression;
-
+    Arguments* _items;
 };
 
-class For : public Statement {
+class FunctionDef: public Statement
+{
 public:
-    For();
-    For(AssignmentStatement *a1, ExprNode *c, AssignmentStatement *a2, Statements *s);
-    AssignmentStatement *&forAssign();
-    ExprNode *&forComp();
-    AssignmentStatement *&forIncrement();
-    Statements *&forBodyStatement();
+    FunctionDef();
+    FunctionDef(Token funcName, Arguments*, Statements*);
+
+
+    std::string &functionName();
+    Arguments* Args();
+    Statements* statements();
 
     virtual void evaluate(SymTab &symTab);
     virtual void print();
 
 private:
-    AssignmentStatement *_forAssign;
-    ExprNode *_forComp;
-    AssignmentStatement *_forIncrement;
-    Statements * _forBodyStatement;
+    Token _functionName;
+    Arguments* _args;
+    Statements* _stmt;
+
 };
 
+class ForStatement: public Statement
+{
+public:
+    ForStatement();
+    ForStatement(Variable* var, Range* r, Statements* stmts);
+
+    virtual void evaluate(SymTab &symTab);
+    virtual void print();
+
+private:
+    ExprNode* _var;
+    Range* _range;
+    Statements* _stmts;
+};
+
+
+class IfStatement: public Statement
+{
+public:
+    IfStatement();
+    IfStatement(ExprNode* condition, Statements* statements);
+
+    virtual void evaluate(SymTab& symTab);
+    virtual void print();
+    bool got_evaluated() { return got_evald; };
+
+private:
+    ExprNode* _cond;
+    Statements* _stmts;
+    bool got_evald;
+
+};
+
+class IfElseStatement: public Statement
+{
+public:
+    IfElseStatement();
+    IfElseStatement(std::vector<IfStatement*>* ifs, Statements* p_else);
+
+    virtual void evaluate(SymTab& symTab);
+    virtual void print();
+
+private:
+    std::vector<IfStatement*>* _ifs;
+    Statements* _else;
+};
 
 #endif //EXPRINTER_STATEMENTS_HPP
-
