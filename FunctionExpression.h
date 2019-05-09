@@ -15,7 +15,12 @@ public:
     virtual void print();
     virtual TypeDescriptor evaluate(SymTab &symTab);
 
+    Arguments* Args();
 
+private:
+    Token _functionName;
+    Arguments* _args;
+    Statements* _stmt;
 
 };
 
