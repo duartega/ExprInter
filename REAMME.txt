@@ -1,0 +1,8 @@
+What Works:
+
+arrays are completely working
+functions are working with general return values and recursion
+
+What Doesn't Work:
+
+return values within if statements or for loops will not break out of the functions

@@ -1,0 +1,24 @@
+
+def fib(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fib(n-1)+fib(n-2)
+
+def test():
+    arr = [6, 7, 8, 1]
+    arr[0] = 54 + 5
+
+    f = arr[0]
+    arr[3] = arr[2] * 5
+
+
+    return arr
+
+
+print test()
+print fib(10)
+
+
