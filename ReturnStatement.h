@@ -13,6 +13,7 @@ public:
     ReturnStatement(ExprNode* ret_val);
     virtual void evaluate(SymTab  &symTab);
     virtual void print();
+    virtual bool isReturnStatment() {return true;}
 
 
 private:

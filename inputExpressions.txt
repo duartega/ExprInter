@@ -2,6 +2,7 @@ def func():
 
 
     return 10
+    print "this should not print"
 
 
 a = func()

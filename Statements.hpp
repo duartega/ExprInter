@@ -26,6 +26,8 @@ public:
 
     virtual void print() = 0;
     virtual void evaluate(SymTab &symTab) = 0;
+
+    virtual bool isReturnStatment() { return false;}
 };
 
 

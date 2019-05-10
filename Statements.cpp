@@ -19,9 +19,17 @@ void Statements::print() {
     }
 }
 
-void Statements::evaluate(SymTab &symTab) {
+void Statements::evaluate(SymTab &symTab)
+{
     for (auto s: _statements)
+    {
         s->evaluate(symTab);
+        if(s->isReturnStatment())
+        {
+            break;
+
+        }
+    }
 }
 
 /*
