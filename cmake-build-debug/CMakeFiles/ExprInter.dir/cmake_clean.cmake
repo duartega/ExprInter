@@ -11,6 +11,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/ExprInter.dir/TypeDescriptor.cpp.obj"
   "CMakeFiles/ExprInter.dir/Array.cpp.obj"
   "CMakeFiles/ExprInter.dir/FunctionExpression.cpp.obj"
+  "CMakeFiles/ExprInter.dir/Function.cpp.obj"
+  "CMakeFiles/ExprInter.dir/ReturnStatement.cpp.obj"
   "ExprInter.pdb"
   "ExprInter.exe"
   "ExprInter.exe.manifest"

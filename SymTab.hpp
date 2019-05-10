@@ -14,6 +14,8 @@
 // initialized, determines if a give variable has been defined or not, and if
 // a variable has been defined, it returns its value.
 
+class Function;
+
 class SymTab {
 public:
     void setValueFor(std::string vName, int value);
@@ -31,18 +33,21 @@ public:
     void openScope();
     void closeScope();
 
+    Function* getFunction(std::string name);
+    void setFunction(std::string name, Function* func );
+/*
     void storeReturnValue(std::string vName, int value);
     void storeReturnValue(std::string vName, std::string value);
     void storeReturnValue(std::string vName, bool value);
     void storeReturnValue(std::string vName, TypeDescriptor value);
-
+*/
     TypeDescriptor getReturnValue(std::string vName) { return _returnValue; };
 
 private:
 
     std::vector<std::map<std::string, TypeDescriptor> >scope;
-    std::stack<std::string, TypeDescriptor> functionTab;
-    std::map<std::string, TypeDescriptor> globalSymTab;
+    std::map<std::string, Function*> functionTab;
+    //std::map<std::string, TypeDescriptor> globalSymTab;
     TypeDescriptor _returnValue;
 };
 

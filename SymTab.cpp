@@ -75,4 +75,15 @@ void SymTab::closeScope() {
     scope.pop_back();
 }
 
+Function *SymTab::getFunction(std::string name) {
+
+
+    return functionTab[name];
+}
+
+void SymTab::setFunction(std::string name, Function* func) {
+
+    functionTab[name] = func;
+}
+
 

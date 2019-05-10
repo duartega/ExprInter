@@ -47,15 +47,37 @@ Statements *Parser::statements() {
                 stmts->addStatement(ifstmt);
                 tok = tokenizer.getToken();
             } else if (tok.getName() == "def") {
-                FunctionDef* funcDef = functionDef();
+                FunctionDef * funcDef = functionDef();
                 stmts->addStatement(funcDef);
+                tok = tokenizer.getToken();
+
             }
         } else if (tok.isName()) {
-            //Assignment statement
-            tokenizer.ungetToken();
-            AssignmentStatement *assignStmt = assignStatement();
-            stmts->addStatement(assignStmt);
-            tok = tokenizer.getToken();
+
+            Token lookahead = tokenizer.getToken();
+            if(lookahead.isOpenParen())
+            {
+                tokenizer.ungetToken();
+                FunctionStatement* funcStmt =  new FunctionStatement(functionNode(tok));
+
+                Token t4 = tokenizer.getToken();
+                if (!t4.eol() && !t4.eof()) {
+                    die("Parser::functionNode", "Expected new line, instead got", t4);
+                }
+
+                stmts->addStatement(funcStmt);
+                tok = tokenizer.getToken();
+
+
+
+            } else{
+                //Assignment statement
+                tokenizer.ungetToken();
+                AssignmentStatement *assignStmt = assignStatement(tok);
+                stmts->addStatement(assignStmt);
+                tok = tokenizer.getToken();
+            }
+
         } else {
             die("Parser::statements", "Unexpected token found at start of line", tok);
         }
@@ -64,8 +86,8 @@ Statements *Parser::statements() {
     return stmts;
 }
 
-AssignmentStatement *Parser::assignStatement() {
-    Token varName = tokenizer.getToken();
+AssignmentStatement *Parser::assignStatement(Token tok) {
+    Token varName = tok;
     if (!varName.isName())
         die("Parser::assignStatement", "Expected a name token, instead got", varName);
 
@@ -182,16 +204,33 @@ ForStatement* Parser::forStatement() {
 FunctionDef* Parser::functionDef() {
     Token tok0 = tokenizer.getToken();
 
+    std::string funcName = tok0.getName();
     Token tok1 = tokenizer.getToken();
     if (!tok1.isOpenParen()) {
         die("Parser::functionDef", "Expected open paren, instead got", tok1);
     }
 
     Arguments *args;
+
     Token tok1a = tokenizer.getToken();
     if(!tok1a.isCloseParen()) {
         tokenizer.ungetToken();
         args = arguments();
+    }
+    int n;
+    if(args)
+    {
+        n = args->count();
+    }
+    else
+        n = 0;
+    std::vector<std::string>params;
+    for( int i = 0; i < n; i++)
+    {
+        ExprNode* expr = args->args()->at(i);
+        Token tok = expr->token();
+        std::string name = tok.getName();
+        params.push_back(name);
     }
 
     Token t2 = tokenizer.getToken();
@@ -221,7 +260,49 @@ FunctionDef* Parser::functionDef() {
         die("Parser::functionDef", "Expected dedent, instead got", t6);
     }
 
-    return new FunctionDef(tok0, args, stm);
+    return new FunctionDef(funcName, params, stm);
+}
+FunctionNode *Parser::functionNode(Token VarName) {
+
+    std::string funcName = VarName.getName();
+    Token tok1 = tokenizer.getToken();
+    if (!tok1.isOpenParen()) {
+        die("Parser::functionNode", "Expected open paren, instead got", tok1);
+    }
+
+    Arguments *args;
+
+    Token tok1a = tokenizer.getToken();
+    if(!tok1a.isCloseParen()) {
+        tokenizer.ungetToken();
+        args = arguments();
+    }
+    int n;
+    if(args)
+    {
+        n = args->count();
+    }
+    else
+        n = 0;
+    std::vector<std::string>params;
+    for( int i; i < n; i++)
+    {
+        ExprNode* expr = args->args()->at(i);
+        Token tok = expr->token();
+        std::string name = tok.getName();
+        params.push_back(name);
+    }
+
+    Token t2 = tokenizer.getToken();
+    if (!t2.isCloseParen()) {
+        die("Parser::functionNode", "Expected close parenthesis, instead got", t2);
+    }
+
+
+
+
+    return new FunctionNode(funcName, args);
+
 }
 
 IfElseStatement* Parser::ifElseStatement() {
@@ -424,8 +505,19 @@ ExprNode *Parser::arith_primary() {
     } else if (tok.isWholeNumber()) {
         p = new WholeNumber(tok);
     } else if (tok.isName()) {
-        p = new Variable(tok);
+        Token lookahead = tokenizer.getToken();
+        if(lookahead.isOpenParen())
+        {
+            tokenizer.ungetToken();
+            p=functionNode(tok);
+
+        }
+        else {
+            tokenizer.ungetToken();
+            p = new Variable(tok);
+        }
     }
+
 
     else if (tok.isOpenSquareBracket())
     {
@@ -456,3 +548,5 @@ ExprNode *Parser::arith_primary() {
     }
     return p;
 }
+
+

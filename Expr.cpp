@@ -134,6 +134,9 @@ TypeDescriptor InfixExprNode::evaluate(SymTab &symTab) {
         }
     } else {
         std::cout << "Type mismatch in InfixExprNode::evaluate" << std::endl;
+        lValue_desc.print();
+        std::cout<<":";
+        rValue_desc.print();
         exit(2);
     }
 }

@@ -95,6 +95,12 @@
 		<Unit filename="C:/Users/Elliot/CLionProjects/ExprInter/Expr.hpp">
 			<Option target="ExprInter"/>
 		</Unit>
+		<Unit filename="C:/Users/Elliot/CLionProjects/ExprInter/Function.cpp">
+			<Option target="ExprInter"/>
+		</Unit>
+		<Unit filename="C:/Users/Elliot/CLionProjects/ExprInter/Function.h">
+			<Option target="ExprInter"/>
+		</Unit>
 		<Unit filename="C:/Users/Elliot/CLionProjects/ExprInter/FunctionExpression.cpp">
 			<Option target="ExprInter"/>
 		</Unit>
@@ -108,6 +114,12 @@
 			<Option target="ExprInter"/>
 		</Unit>
 		<Unit filename="C:/Users/Elliot/CLionProjects/ExprInter/Range.cpp">
+			<Option target="ExprInter"/>
+		</Unit>
+		<Unit filename="C:/Users/Elliot/CLionProjects/ExprInter/ReturnStatement.cpp">
+			<Option target="ExprInter"/>
+		</Unit>
+		<Unit filename="C:/Users/Elliot/CLionProjects/ExprInter/ReturnStatement.h">
 			<Option target="ExprInter"/>
 		</Unit>
 		<Unit filename="C:/Users/Elliot/CLionProjects/ExprInter/Statements.cpp">

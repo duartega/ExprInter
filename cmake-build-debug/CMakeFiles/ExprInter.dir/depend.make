@@ -20,9 +20,25 @@ CMakeFiles/ExprInter.dir/Expr.cpp.obj: ../SymTab.hpp
 CMakeFiles/ExprInter.dir/Expr.cpp.obj: ../Token.hpp
 CMakeFiles/ExprInter.dir/Expr.cpp.obj: ../TypeDescriptor.cpp
 
+CMakeFiles/ExprInter.dir/Function.cpp.obj: ../Function.cpp
+CMakeFiles/ExprInter.dir/Function.cpp.obj: ../Function.h
+
+CMakeFiles/ExprInter.dir/FunctionExpression.cpp.obj: ../Arguments.cpp
+CMakeFiles/ExprInter.dir/FunctionExpression.cpp.obj: ../Expr.hpp
+CMakeFiles/ExprInter.dir/FunctionExpression.cpp.obj: ../Function.h
+CMakeFiles/ExprInter.dir/FunctionExpression.cpp.obj: ../FunctionExpression.cpp
+CMakeFiles/ExprInter.dir/FunctionExpression.cpp.obj: ../FunctionExpression.h
+CMakeFiles/ExprInter.dir/FunctionExpression.cpp.obj: ../Range.cpp
+CMakeFiles/ExprInter.dir/FunctionExpression.cpp.obj: ../Statements.hpp
+CMakeFiles/ExprInter.dir/FunctionExpression.cpp.obj: ../SymTab.hpp
+CMakeFiles/ExprInter.dir/FunctionExpression.cpp.obj: ../Token.hpp
+CMakeFiles/ExprInter.dir/FunctionExpression.cpp.obj: ../TypeDescriptor.cpp
+
 CMakeFiles/ExprInter.dir/Parser.cpp.obj: ../Arguments.cpp
 CMakeFiles/ExprInter.dir/Parser.cpp.obj: ../Array.cpp
 CMakeFiles/ExprInter.dir/Parser.cpp.obj: ../Expr.hpp
+CMakeFiles/ExprInter.dir/Parser.cpp.obj: ../Function.h
+CMakeFiles/ExprInter.dir/Parser.cpp.obj: ../FunctionExpression.h
 CMakeFiles/ExprInter.dir/Parser.cpp.obj: ../Parser.cpp
 CMakeFiles/ExprInter.dir/Parser.cpp.obj: ../Parser.hpp
 CMakeFiles/ExprInter.dir/Parser.cpp.obj: ../Range.cpp
@@ -40,6 +56,7 @@ CMakeFiles/ExprInter.dir/Range.cpp.obj: ../TypeDescriptor.cpp
 
 CMakeFiles/ExprInter.dir/Statements.cpp.obj: ../Arguments.cpp
 CMakeFiles/ExprInter.dir/Statements.cpp.obj: ../Expr.hpp
+CMakeFiles/ExprInter.dir/Statements.cpp.obj: ../Function.h
 CMakeFiles/ExprInter.dir/Statements.cpp.obj: ../Range.cpp
 CMakeFiles/ExprInter.dir/Statements.cpp.obj: ../Statements.cpp
 CMakeFiles/ExprInter.dir/Statements.cpp.obj: ../Statements.hpp
@@ -63,6 +80,8 @@ CMakeFiles/ExprInter.dir/TypeDescriptor.cpp.obj: ../TypeDescriptor.cpp
 CMakeFiles/ExprInter.dir/main.cpp.obj: ../Arguments.cpp
 CMakeFiles/ExprInter.dir/main.cpp.obj: ../Array.cpp
 CMakeFiles/ExprInter.dir/main.cpp.obj: ../Expr.hpp
+CMakeFiles/ExprInter.dir/main.cpp.obj: ../Function.h
+CMakeFiles/ExprInter.dir/main.cpp.obj: ../FunctionExpression.h
 CMakeFiles/ExprInter.dir/main.cpp.obj: ../Parser.hpp
 CMakeFiles/ExprInter.dir/main.cpp.obj: ../Range.cpp
 CMakeFiles/ExprInter.dir/main.cpp.obj: ../Statements.hpp

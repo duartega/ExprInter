@@ -203,6 +203,33 @@ Expr.cpp.s:
 	$(MAKE) -f CMakeFiles\ExprInter.dir\build.make CMakeFiles/ExprInter.dir/Expr.cpp.s
 .PHONY : Expr.cpp.s
 
+Function.obj: Function.cpp.obj
+
+.PHONY : Function.obj
+
+# target to build an object file
+Function.cpp.obj:
+	$(MAKE) -f CMakeFiles\ExprInter.dir\build.make CMakeFiles/ExprInter.dir/Function.cpp.obj
+.PHONY : Function.cpp.obj
+
+Function.i: Function.cpp.i
+
+.PHONY : Function.i
+
+# target to preprocess a source file
+Function.cpp.i:
+	$(MAKE) -f CMakeFiles\ExprInter.dir\build.make CMakeFiles/ExprInter.dir/Function.cpp.i
+.PHONY : Function.cpp.i
+
+Function.s: Function.cpp.s
+
+.PHONY : Function.s
+
+# target to generate assembly for a file
+Function.cpp.s:
+	$(MAKE) -f CMakeFiles\ExprInter.dir\build.make CMakeFiles/ExprInter.dir/Function.cpp.s
+.PHONY : Function.cpp.s
+
 FunctionExpression.obj: FunctionExpression.cpp.obj
 
 .PHONY : FunctionExpression.obj
@@ -283,6 +310,33 @@ Range.s: Range.cpp.s
 Range.cpp.s:
 	$(MAKE) -f CMakeFiles\ExprInter.dir\build.make CMakeFiles/ExprInter.dir/Range.cpp.s
 .PHONY : Range.cpp.s
+
+ReturnStatement.obj: ReturnStatement.cpp.obj
+
+.PHONY : ReturnStatement.obj
+
+# target to build an object file
+ReturnStatement.cpp.obj:
+	$(MAKE) -f CMakeFiles\ExprInter.dir\build.make CMakeFiles/ExprInter.dir/ReturnStatement.cpp.obj
+.PHONY : ReturnStatement.cpp.obj
+
+ReturnStatement.i: ReturnStatement.cpp.i
+
+.PHONY : ReturnStatement.i
+
+# target to preprocess a source file
+ReturnStatement.cpp.i:
+	$(MAKE) -f CMakeFiles\ExprInter.dir\build.make CMakeFiles/ExprInter.dir/ReturnStatement.cpp.i
+.PHONY : ReturnStatement.cpp.i
+
+ReturnStatement.s: ReturnStatement.cpp.s
+
+.PHONY : ReturnStatement.s
+
+# target to generate assembly for a file
+ReturnStatement.cpp.s:
+	$(MAKE) -f CMakeFiles\ExprInter.dir\build.make CMakeFiles/ExprInter.dir/ReturnStatement.cpp.s
+.PHONY : ReturnStatement.cpp.s
 
 Statements.obj: Statements.cpp.obj
 
@@ -464,6 +518,9 @@ help:
 	@echo ... Expr.obj
 	@echo ... Expr.i
 	@echo ... Expr.s
+	@echo ... Function.obj
+	@echo ... Function.i
+	@echo ... Function.s
 	@echo ... FunctionExpression.obj
 	@echo ... FunctionExpression.i
 	@echo ... FunctionExpression.s
@@ -473,6 +530,9 @@ help:
 	@echo ... Range.obj
 	@echo ... Range.i
 	@echo ... Range.s
+	@echo ... ReturnStatement.obj
+	@echo ... ReturnStatement.i
+	@echo ... ReturnStatement.s
 	@echo ... Statements.obj
 	@echo ... Statements.i
 	@echo ... Statements.s

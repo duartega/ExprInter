@@ -212,6 +212,32 @@ CMakeFiles/ExprInter.dir/FunctionExpression.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ExprInter.dir/FunctionExpression.cpp.s"
 	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Elliot\CLionProjects\ExprInter\FunctionExpression.cpp -o CMakeFiles\ExprInter.dir\FunctionExpression.cpp.s
 
+CMakeFiles/ExprInter.dir/Function.cpp.obj: CMakeFiles/ExprInter.dir/flags.make
+CMakeFiles/ExprInter.dir/Function.cpp.obj: ../Function.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Elliot\CLionProjects\ExprInter\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/ExprInter.dir/Function.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\ExprInter.dir\Function.cpp.obj -c C:\Users\Elliot\CLionProjects\ExprInter\Function.cpp
+
+CMakeFiles/ExprInter.dir/Function.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ExprInter.dir/Function.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Elliot\CLionProjects\ExprInter\Function.cpp > CMakeFiles\ExprInter.dir\Function.cpp.i
+
+CMakeFiles/ExprInter.dir/Function.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ExprInter.dir/Function.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Elliot\CLionProjects\ExprInter\Function.cpp -o CMakeFiles\ExprInter.dir\Function.cpp.s
+
+CMakeFiles/ExprInter.dir/ReturnStatement.cpp.obj: CMakeFiles/ExprInter.dir/flags.make
+CMakeFiles/ExprInter.dir/ReturnStatement.cpp.obj: ../ReturnStatement.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Elliot\CLionProjects\ExprInter\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/ExprInter.dir/ReturnStatement.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\ExprInter.dir\ReturnStatement.cpp.obj -c C:\Users\Elliot\CLionProjects\ExprInter\ReturnStatement.cpp
+
+CMakeFiles/ExprInter.dir/ReturnStatement.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ExprInter.dir/ReturnStatement.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Elliot\CLionProjects\ExprInter\ReturnStatement.cpp > CMakeFiles\ExprInter.dir\ReturnStatement.cpp.i
+
+CMakeFiles/ExprInter.dir/ReturnStatement.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ExprInter.dir/ReturnStatement.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Elliot\CLionProjects\ExprInter\ReturnStatement.cpp -o CMakeFiles\ExprInter.dir\ReturnStatement.cpp.s
+
 # Object files for target ExprInter
 ExprInter_OBJECTS = \
 "CMakeFiles/ExprInter.dir/main.cpp.obj" \
@@ -225,7 +251,9 @@ ExprInter_OBJECTS = \
 "CMakeFiles/ExprInter.dir/Range.cpp.obj" \
 "CMakeFiles/ExprInter.dir/TypeDescriptor.cpp.obj" \
 "CMakeFiles/ExprInter.dir/Array.cpp.obj" \
-"CMakeFiles/ExprInter.dir/FunctionExpression.cpp.obj"
+"CMakeFiles/ExprInter.dir/FunctionExpression.cpp.obj" \
+"CMakeFiles/ExprInter.dir/Function.cpp.obj" \
+"CMakeFiles/ExprInter.dir/ReturnStatement.cpp.obj"
 
 # External object files for target ExprInter
 ExprInter_EXTERNAL_OBJECTS =
@@ -242,11 +270,13 @@ ExprInter.exe: CMakeFiles/ExprInter.dir/Range.cpp.obj
 ExprInter.exe: CMakeFiles/ExprInter.dir/TypeDescriptor.cpp.obj
 ExprInter.exe: CMakeFiles/ExprInter.dir/Array.cpp.obj
 ExprInter.exe: CMakeFiles/ExprInter.dir/FunctionExpression.cpp.obj
+ExprInter.exe: CMakeFiles/ExprInter.dir/Function.cpp.obj
+ExprInter.exe: CMakeFiles/ExprInter.dir/ReturnStatement.cpp.obj
 ExprInter.exe: CMakeFiles/ExprInter.dir/build.make
 ExprInter.exe: CMakeFiles/ExprInter.dir/linklibs.rsp
 ExprInter.exe: CMakeFiles/ExprInter.dir/objects1.rsp
 ExprInter.exe: CMakeFiles/ExprInter.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Elliot\CLionProjects\ExprInter\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable ExprInter.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Elliot\CLionProjects\ExprInter\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable ExprInter.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\ExprInter.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -1,60 +1,9 @@
+def func(a, b):
 
-#Special cases
-print "1 is not prime"
-print "2 is prime"
-
-prime_count = 1
-for i in range(3, 100, 2):
-    d = True
-
-    #Check if any number from 3 to i divides it
-    for j in range(3, i / 2 + 1):
-        if (i % j == 0):
-            d = False
-
-    #If nothing divided it, then it's prime
-    if (d):
-        prime_count = prime_count + 1
-        print i, "is prime"
-    else:
-        print i, "is not prime"
-    print i + 1, "is not prime" #All even numbers > 2 are not prime
-print "There are", prime_count, "primes below 100"
-
-# I did a decent amount of testing on things like this code above to make sure everything
-# works, but I easily could have missed something small since there was a lot to keep track of
-
-a = 10
-b = 20
-c = 30
-d = a + b
-e = (5 + 6) * 2
-if (60 + 30 / 3 < 100) :
-    print "true"
-if a + b == 5:
-    print "true"
-else:
-    print "false" # comment
-str = "56"
-print a, b, c, d, "str = ", str, ", ", e
-
-t = True # Side comment
-f = True
-if  t and f:
-    print "This works"
-
-## Test for addition ##
-if 1+1 != 2:
- print "Addition between two integers produced the wrong answer: 1+1 =", 1+1, ", should be 2"
- failCount = failCount + 1
+    c = a + b
+    print c
 
 
-## testing variable name with numbers ##
-_q = 5
-print _q
-
-
-print 10 > 6 + 2
-
-## This is an error ##
-print (10 > 6) + 2
+a = func(5, 6)
+a = a + 5
+print a

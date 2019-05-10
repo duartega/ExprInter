@@ -20,10 +20,26 @@ CMakeFiles/ExprInter.dir/Expr.cpp.obj
  C:/Users/Elliot/CLionProjects/ExprInter/SymTab.hpp
  C:/Users/Elliot/CLionProjects/ExprInter/Token.hpp
  C:/Users/Elliot/CLionProjects/ExprInter/TypeDescriptor.cpp
+CMakeFiles/ExprInter.dir/Function.cpp.obj
+ C:/Users/Elliot/CLionProjects/ExprInter/Function.cpp
+ C:/Users/Elliot/CLionProjects/ExprInter/Function.h
+CMakeFiles/ExprInter.dir/FunctionExpression.cpp.obj
+ C:/Users/Elliot/CLionProjects/ExprInter/Arguments.cpp
+ C:/Users/Elliot/CLionProjects/ExprInter/Expr.hpp
+ C:/Users/Elliot/CLionProjects/ExprInter/Function.h
+ C:/Users/Elliot/CLionProjects/ExprInter/FunctionExpression.cpp
+ C:/Users/Elliot/CLionProjects/ExprInter/FunctionExpression.h
+ C:/Users/Elliot/CLionProjects/ExprInter/Range.cpp
+ C:/Users/Elliot/CLionProjects/ExprInter/Statements.hpp
+ C:/Users/Elliot/CLionProjects/ExprInter/SymTab.hpp
+ C:/Users/Elliot/CLionProjects/ExprInter/Token.hpp
+ C:/Users/Elliot/CLionProjects/ExprInter/TypeDescriptor.cpp
 CMakeFiles/ExprInter.dir/Parser.cpp.obj
  C:/Users/Elliot/CLionProjects/ExprInter/Arguments.cpp
  C:/Users/Elliot/CLionProjects/ExprInter/Array.cpp
  C:/Users/Elliot/CLionProjects/ExprInter/Expr.hpp
+ C:/Users/Elliot/CLionProjects/ExprInter/Function.h
+ C:/Users/Elliot/CLionProjects/ExprInter/FunctionExpression.h
  C:/Users/Elliot/CLionProjects/ExprInter/Parser.cpp
  C:/Users/Elliot/CLionProjects/ExprInter/Parser.hpp
  C:/Users/Elliot/CLionProjects/ExprInter/Range.cpp
@@ -41,6 +57,7 @@ CMakeFiles/ExprInter.dir/Range.cpp.obj
 CMakeFiles/ExprInter.dir/Statements.cpp.obj
  C:/Users/Elliot/CLionProjects/ExprInter/Arguments.cpp
  C:/Users/Elliot/CLionProjects/ExprInter/Expr.hpp
+ C:/Users/Elliot/CLionProjects/ExprInter/Function.h
  C:/Users/Elliot/CLionProjects/ExprInter/Range.cpp
  C:/Users/Elliot/CLionProjects/ExprInter/Statements.cpp
  C:/Users/Elliot/CLionProjects/ExprInter/Statements.hpp
@@ -64,6 +81,8 @@ CMakeFiles/ExprInter.dir/main.cpp.obj
  C:/Users/Elliot/CLionProjects/ExprInter/Arguments.cpp
  C:/Users/Elliot/CLionProjects/ExprInter/Array.cpp
  C:/Users/Elliot/CLionProjects/ExprInter/Expr.hpp
+ C:/Users/Elliot/CLionProjects/ExprInter/Function.h
+ C:/Users/Elliot/CLionProjects/ExprInter/FunctionExpression.h
  C:/Users/Elliot/CLionProjects/ExprInter/Parser.hpp
  C:/Users/Elliot/CLionProjects/ExprInter/Range.cpp
  C:/Users/Elliot/CLionProjects/ExprInter/Statements.hpp

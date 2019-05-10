@@ -6,17 +6,19 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/Elliot/CLionProjects/ExprInter/SymTab.cpp
+C:/Users/Elliot/CLionProjects/ExprInter/Expr.cpp
 iostream
 -
-stack
--
-iomanip
--
-vector
--
+Expr.hpp
+C:/Users/Elliot/CLionProjects/ExprInter/Expr.hpp
+
+C:/Users/Elliot/CLionProjects/ExprInter/Expr.hpp
+Token.hpp
+C:/Users/Elliot/CLionProjects/ExprInter/Token.hpp
 SymTab.hpp
 C:/Users/Elliot/CLionProjects/ExprInter/SymTab.hpp
+TypeDescriptor.cpp
+C:/Users/Elliot/CLionProjects/ExprInter/TypeDescriptor.cpp
 
 C:/Users/Elliot/CLionProjects/ExprInter/SymTab.hpp
 string
@@ -27,6 +29,10 @@ stack
 -
 TypeDescriptor.cpp
 C:/Users/Elliot/CLionProjects/ExprInter/TypeDescriptor.cpp
+
+C:/Users/Elliot/CLionProjects/ExprInter/Token.hpp
+string
+-
 
 C:/Users/Elliot/CLionProjects/ExprInter/TypeDescriptor.cpp
 string

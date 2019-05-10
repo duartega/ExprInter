@@ -12,6 +12,7 @@
 #include "SymTab.hpp"
 #include "Arguments.cpp"
 #include "Range.cpp"
+#include "Function.h"
 
 // The Statement (abstract) class serves as a super class for all statements that
 // are defined in the language. Ultimately, statements have to be evaluated.
@@ -81,19 +82,18 @@ class FunctionDef: public Statement
 {
 public:
     FunctionDef();
-    FunctionDef(Token funcName, Arguments*, Statements*);
-
+    FunctionDef(std::string funcName, std::vector<std::string> args, Statements* stmts);
 
     std::string &functionName();
-    Arguments* Args();
-    Statements* statements();
+    std::vector<std::string> Args();
+
 
     virtual void evaluate(SymTab &symTab);
     virtual void print();
 
 private:
-    Token _functionName;
-    Arguments* _args;
+    std::string _functionName;
+    std::vector<std::string> _args;
     Statements* _stmt;
 
 };

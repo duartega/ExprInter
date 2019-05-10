@@ -8,6 +8,8 @@
 #include "Expr.hpp"
 #include "Statements.hpp"
 #include "Array.cpp"
+#include "Function.h"
+#include "FunctionExpression.h"
 
 #include<vector>
 #include<iostream>
@@ -20,11 +22,12 @@ public:
 
     Statements *statements();
 
-    AssignmentStatement *assignStatement();
+    AssignmentStatement *assignStatement(Token VarName);
     PrintStatement *printStatement();
     ForStatement* forStatement();
     IfElseStatement* ifElseStatement();
     FunctionDef* functionDef();
+    FunctionNode* functionNode(Token VarName);
 
     ExprNode *rel_expr();
     ExprNode *rel_term();

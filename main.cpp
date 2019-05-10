@@ -26,6 +26,7 @@ int main(int argc, char *argv[]) {
     Parser parser(tokenizer);
     Statements *statements = parser.statements();
     SymTab symTab;
+    symTab.openScope();
     statements->evaluate(symTab);
     
     return 0;

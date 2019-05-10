@@ -54,26 +54,24 @@ void AssignmentStatement::print() {
  */
 
 FunctionDef::FunctionDef() : _functionName{}, _args{nullptr}, _stmt{nullptr} {}
-FunctionDef::FunctionDef(Token funcName, Arguments*, Statements*) : _functionName{}, _args{}, _stmt{} {}
+FunctionDef::FunctionDef(std::string funcName, std::vector<std::string> args, Statements* stmts) : _functionName{funcName}, _args{args}, _stmt{stmts} {}
 
 
-Arguments* FunctionDef::Args() {
+std::vector<std::string> FunctionDef::Args() {
     return _args;
 }
 
-void FunctionDef::evaluate(SymTab &symTab) {
+void FunctionDef::evaluate(SymTab &symTab)
+{
 
-    auto v = _args->args();
-    for (unsigned i = 0; i < v->size(); i++) {
-        ExprNode* e = v->at(i);
-        TypeDescriptor res = e->evaluate(symTab);
-    }
-    std::cout << std::endl;
+    auto func = new Function(_args, _stmt);
+    symTab.setFunction( _functionName ,func);
+
 }
 
 void FunctionDef::print() {
     std::cout << "def ";
-    std::cout << _functionName.getName();
+    std::cout << _functionName;
     _stmt->print();
 }
 
