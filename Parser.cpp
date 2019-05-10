@@ -51,6 +51,12 @@ Statements *Parser::statements() {
                 stmts->addStatement(funcDef);
                 tok = tokenizer.getToken();
 
+
+            }
+            else if (tok.getName() == "return"){
+                ReturnStatement * returnstmt = returnStatement();
+                stmts->addStatement(returnstmt);
+                tok = tokenizer.getToken();
             }
         } else if (tok.isName()) {
 
@@ -210,12 +216,15 @@ FunctionDef* Parser::functionDef() {
         die("Parser::functionDef", "Expected open paren, instead got", tok1);
     }
 
-    Arguments *args;
+    Arguments *args = nullptr;
 
     Token tok1a = tokenizer.getToken();
     if(!tok1a.isCloseParen()) {
         tokenizer.ungetToken();
         args = arguments();
+    }
+    else{
+        tokenizer.ungetToken();
     }
     int n;
     if(args)
@@ -270,20 +279,24 @@ FunctionNode *Parser::functionNode(Token VarName) {
         die("Parser::functionNode", "Expected open paren, instead got", tok1);
     }
 
-    Arguments *args;
+    Arguments *args = nullptr;
 
     Token tok1a = tokenizer.getToken();
     if(!tok1a.isCloseParen()) {
         tokenizer.ungetToken();
         args = arguments();
     }
-    int n;
+    else{
+        tokenizer.ungetToken();
+    }
+    int n = 0;
     if(args)
     {
         n = args->count();
     }
-    else
+    else {
         n = 0;
+    }
     std::vector<std::string>params;
     for( int i; i < n; i++)
     {
@@ -547,6 +560,19 @@ ExprNode *Parser::arith_primary() {
         return e;
     }
     return p;
+}
+
+ReturnStatement *Parser::returnStatement() {
+
+    ExprNode* ret = rel_expr();
+
+    Token t4 = tokenizer.getToken();
+    if (!t4.eol() && !t4.eof()) {
+        die("Parser::functionNode", "Expected new line, instead got", t4);
+    }
+
+    return new ReturnStatement(ret);
+
 }
 
 

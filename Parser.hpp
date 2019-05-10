@@ -10,6 +10,7 @@
 #include "Array.cpp"
 #include "Function.h"
 #include "FunctionExpression.h"
+#include "ReturnStatement.h"
 
 #include<vector>
 #include<iostream>
@@ -28,6 +29,7 @@ public:
     IfElseStatement* ifElseStatement();
     FunctionDef* functionDef();
     FunctionNode* functionNode(Token VarName);
+    ReturnStatement* returnStatement();
 
     ExprNode *rel_expr();
     ExprNode *rel_term();

@@ -8,11 +8,17 @@ void ReturnStatement::print() {
 
 }
 
-void ReturnStatement::evaluate() {
+void ReturnStatement::evaluate(SymTab  &symTab) {
+
+    TypeDescriptor RV = _ret_val->evaluate(symTab);
+
+    symTab.setReturnVal(RV);
+
 
 }
 
 ReturnStatement::ReturnStatement(ExprNode *ret_val) {
+
     _ret_val = ret_val;
 
 }

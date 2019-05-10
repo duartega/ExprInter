@@ -11,7 +11,7 @@ class ReturnStatement : public Statement {
 public:
 
     ReturnStatement(ExprNode* ret_val);
-    virtual void evaluate();
+    virtual void evaluate(SymTab  &symTab);
     virtual void print();
 
 

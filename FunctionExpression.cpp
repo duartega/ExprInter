@@ -12,25 +12,38 @@ TypeDescriptor FunctionNode::evaluate(SymTab &symTab) {
 
     _stmt =  function->get_stmts();
     V_Names = function->getP_Names();
-
-    auto v = _args->args();
-    std::vector<TypeDescriptor> TypeVector;
-    for (unsigned i = 0; i < v->size(); i++) {
-        ExprNode* e = v->at(i);
-        TypeDescriptor res = e->evaluate(symTab);
-        TypeVector.push_back(res);
-
-    }
-    symTab.openScope();
-    for(auto i = 0; i < TypeVector.size() ;i++)
+    if(_args)
     {
-        symTab.setValueFor(V_Names[i],TypeVector[i]);
+        auto v = _args->args();
+
+        std::vector<TypeDescriptor> TypeVector;
+        for (unsigned i = 0; i < v->size(); i++) {
+            ExprNode *e = v->at(i);
+            TypeDescriptor res = e->evaluate(symTab);
+            TypeVector.push_back(res);
+
+        }
+        symTab.openScope();
+        for (auto i = 0; i < TypeVector.size(); i++) {
+            symTab.setValueFor(V_Names[i], TypeVector[i]);
+        }
+    }
+    else
+    {
+        symTab.openScope();
     }
     _stmt->evaluate(symTab);
 
     symTab.closeScope();
+    if(symTab.hasReturnValue())
+    {
+        return symTab.getReturnValue();
+    }
+    else
+    {
+        return TypeDescriptor();
+    }
 
-    return TypeDescriptor();
 
 }
 

@@ -1,9 +1,9 @@
-def func(a, b):
-
-    c = a + b
-    print c
+def func():
 
 
-a = func(5, 6)
-a = a + 5
+    return 10
+
+
+a = func()
+a = a * a
 print a

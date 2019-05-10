@@ -86,4 +86,21 @@ void SymTab::setFunction(std::string name, Function* func) {
     functionTab[name] = func;
 }
 
+TypeDescriptor SymTab::getReturnValue() {
+
+    hasReturnVal = false;
+    return _returnValue;
+}
+
+void SymTab::setReturnVal(TypeDescriptor value) {
+    hasReturnVal = true;
+    _returnValue = value;
+
+
+}
+
+bool SymTab::hasReturnValue() {
+    return hasReturnVal;
+}
+
 

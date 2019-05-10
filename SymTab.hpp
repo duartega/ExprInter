@@ -35,12 +35,11 @@ public:
 
     Function* getFunction(std::string name);
     void setFunction(std::string name, Function* func );
-/*
-    void storeReturnValue(std::string vName, int value);
-    void storeReturnValue(std::string vName, std::string value);
-    void storeReturnValue(std::string vName, bool value);
-    void storeReturnValue(std::string vName, TypeDescriptor value);
-*/
+
+    void setReturnVal(TypeDescriptor value);
+    TypeDescriptor getReturnValue();
+    bool hasReturnValue();
+
     TypeDescriptor getReturnValue(std::string vName) { return _returnValue; };
 
 private:
@@ -49,6 +48,7 @@ private:
     std::map<std::string, Function*> functionTab;
     //std::map<std::string, TypeDescriptor> globalSymTab;
     TypeDescriptor _returnValue;
+    bool hasReturnVal = false;
 };
 
 #endif //EXPRINTER_SYMTAB_HPP
