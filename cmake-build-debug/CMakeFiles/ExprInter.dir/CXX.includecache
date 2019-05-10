@@ -44,10 +44,6 @@ vector
 string
 -
 
-C:/Users/Elliot/CLionProjects/ExprInter/FunctionExpression.cpp
-FunctionExpression.h
-C:/Users/Elliot/CLionProjects/ExprInter/FunctionExpression.h
-
 C:/Users/Elliot/CLionProjects/ExprInter/FunctionExpression.h
 SymTab.hpp
 C:/Users/Elliot/CLionProjects/ExprInter/SymTab.hpp
@@ -102,15 +98,7 @@ C:/Users/Elliot/CLionProjects/ExprInter/Expr.hpp
 SymTab.hpp
 C:/Users/Elliot/CLionProjects/ExprInter/SymTab.hpp
 
-C:/Users/Elliot/CLionProjects/ExprInter/ReturnStatement.cpp
-ReturnStatement.h
 C:/Users/Elliot/CLionProjects/ExprInter/ReturnStatement.h
-
-C:/Users/Elliot/CLionProjects/ExprInter/ReturnStatement.h
-Statements.hpp
-C:/Users/Elliot/CLionProjects/ExprInter/Statements.hpp
-
-C:/Users/Elliot/CLionProjects/ExprInter/Statements.cpp
 Statements.hpp
 C:/Users/Elliot/CLionProjects/ExprInter/Statements.hpp
 
@@ -159,16 +147,4 @@ iostream
 -
 vector
 -
-
-C:/Users/Elliot/CLionProjects/ExprInter/main.cpp
-iostream
--
-vector
--
-Token.hpp
-C:/Users/Elliot/CLionProjects/ExprInter/Token.hpp
-Tokenizer.hpp
-C:/Users/Elliot/CLionProjects/ExprInter/Tokenizer.hpp
-Parser.hpp
-C:/Users/Elliot/CLionProjects/ExprInter/Parser.hpp
 

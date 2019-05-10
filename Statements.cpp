@@ -201,3 +201,40 @@ void IfElseStatement::print() {
         std::cout << "-----";
     }
 }
+
+ArrayPush::ArrayPush() {}
+ArrayPush::ArrayPush(Token token, ExprNode *value) {_arrayName = token; _value= value;}
+void ArrayPush::print() {}
+void ArrayPush::evaluate(SymTab &symTab) {
+    TypeDescriptor s = symTab.getValueFor(_arrayName.getName());
+    TypeDescriptor v = _value->evaluate(symTab);
+    s.push(v);
+    symTab.setValueFor(_arrayName.getName(), s);
+}
+
+ArrayPop::ArrayPop() {}
+ArrayPop::ArrayPop(Token token) {_arrayName = token;}
+void ArrayPop::print() {}
+void ArrayPop::evaluate(SymTab &symTab) {
+    TypeDescriptor s = symTab.getValueFor(_arrayName.getName());
+    if (s.empty()) {
+        std::cout << "Vector index out of bounds. Exiting...\n";
+        exit(7);
+    }
+    else {
+        s.pop();
+        symTab.setValueFor(_arrayName.getName(), s);
+    }
+}
+
+Subscription::Subscription() {}
+Subscription::Subscription(Token token, ExprNode *index, ExprNode *value) {_arrayName = token; _index = index; _value = value;}
+void Subscription::print() {}
+void Subscription::evaluate(SymTab &symTab) {
+    TypeDescriptor s = symTab.getValueFor(_arrayName.getName());
+    TypeDescriptor ind = _index->evaluate(symTab);
+    TypeDescriptor val = _value->evaluate(symTab);
+
+    s.atSet(ind, val);
+    symTab.setValueFor(_arrayName.getName(), s);
+}

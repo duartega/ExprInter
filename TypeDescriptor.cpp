@@ -67,13 +67,52 @@ public:
         return b_value;
     }
 
-    std::vector<TypeDescriptor> get_avalue()
+    int get_size()
     {
         if (_type != ARRAY)
         {
-            std::cout << "Incorrect type used somewhere: Expected array but got: " << _type << std::endl;
+            std::cout << "Tried to get size of array on a non array variable: Type is: " << _type << std::endl;
             exit(3);
         }
+        return a_value.size();
+    }
+
+    void push(TypeDescriptor value) {
+        a_value.emplace_back(value);
+    }
+
+    void atSet(TypeDescriptor index, TypeDescriptor value) {
+        if (a_value.size() < index.get_ivalue())
+        {
+            std::cout << "You are out of bounds! Exiting...";
+            exit(8);
+        }
+        else
+            a_value.at(index.get_ivalue()) = value;
+    }
+
+    TypeDescriptor at(TypeDescriptor index) {
+        if (a_value.size() < index.get_ivalue())
+        {
+            std::cout << "You are out of bounds! Exiting...";
+            exit(8);
+        }
+        else
+            return a_value.at(index.get_ivalue());
+    }
+
+    void pop() {
+        a_value.pop_back();
+    }
+
+    bool empty(){
+        if (a_value.empty())
+            return true;
+        else
+            return false;
+    }
+
+    std::vector<TypeDescriptor> returnArray() {
         return a_value;
     }
 
@@ -87,13 +126,20 @@ public:
             else {std::cout << "False";}
         }
         else if (_type == ARRAY) {
-            for(std::vector<TypeDescriptor>::iterator it = a_value.begin(); it != a_value.end(); ++it) {
-                it->print();
+            std::cout << "[";
+            if (!a_value.empty()) {
+                for (auto it = a_value.begin(); it != a_value.end() - 1; ++it) {
+                    it->print();
+                    std::cout << ", ";
+                }
+                a_value.back().print();
             }
+            std::cout << "]";
         }
-
         else {std::cout << "None";}
     }
+
+
 
     type get_type() { return _type; }
 

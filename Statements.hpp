@@ -147,4 +147,47 @@ private:
     Statements* _else;
 };
 
+class ArrayPop: public Statement
+{
+public:
+    ArrayPop();
+    ArrayPop(Token token);
+
+    virtual void evaluate(SymTab &symTab);
+    virtual void print();
+
+private:
+    Token _arrayName;
+};
+
+class ArrayPush: public Statement
+{
+public:
+    ArrayPush();
+    ArrayPush(Token token, ExprNode *value);
+
+    virtual void evaluate(SymTab &symTab);
+    virtual void print();
+
+private:
+    Token _arrayName;
+    ExprNode *_value;
+};
+
+class Subscription: public Statement
+{
+public:
+    Subscription();
+    Subscription(Token token, ExprNode *index, ExprNode *valueToSet);
+
+    virtual void evaluate(SymTab &symTab);
+    virtual void print();
+    //arr[0] = 54
+
+private:
+    Token _arrayName;
+    ExprNode *_index;
+    ExprNode *_value;
+};
+
 #endif //EXPRINTER_STATEMENTS_HPP

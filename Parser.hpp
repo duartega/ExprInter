@@ -30,6 +30,9 @@ public:
     FunctionDef* functionDef();
     FunctionNode* functionNode(Token VarName);
     ReturnStatement* returnStatement();
+    ArrayPop* popStatement(Token varName);
+    ArrayPush* pushStatement(Token varName);
+    Subscription* subAssign(Token varName);
 
     ExprNode *rel_expr();
     ExprNode *rel_term();

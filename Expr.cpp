@@ -207,9 +207,33 @@ TypeDescriptor BooleanValue::evaluate(SymTab &symTab)
         exit(5);
     }
 }
+ArraySize::ArraySize(Token token): ExprNode(token) {}
+void ArraySize::print(){
+    token().print();
+}
+
+TypeDescriptor ArraySize::evaluate(SymTab &symTab) {
+    return symTab.getValueFor(token().getName()).get_size();
+}
+
+Subscript::Subscript(Token token, ExprNode *index) : ExprNode(token) {_index = index;}
+void Subscript::print() {
+    token().print();
+}
+
+TypeDescriptor Subscript::evaluate(SymTab &symTab) {
+    TypeDescriptor s = symTab.getValueFor(token().getName());
+    TypeDescriptor ind = _index->evaluate(symTab);
+    TypeDescriptor ret = s.at(ind);
+    return ret;
+}
+
+
 
 ExprNode::~ExprNode() = default;
 WholeNumber::~WholeNumber() = default;
 StringValue::~StringValue() = default;
 BooleanValue::~BooleanValue() = default;
 Variable::~Variable() = default;
+ArraySize::~ArraySize() = default;
+Subscript::~Subscript() = default;

@@ -1,10 +1,28 @@
-def func():
 
+def findSmallestIdxFromIdx(names, idx):
+    smallestIdx = idx
+    for i in range(idx + 1, len(names)):
+        if names[i] < names[idx]:
+            smallestIdx = i
+    return smallestIdx
 
-    return 10
-    print "this should not print"
+        
+def insertionSort(names):
+    upperBound = len(names) - 1
+    for idx in range( upperBound ):
+        smallestIdx = findSmallestIdxFromIdx(names, idx)
+        if smallestIdx != idx:
+            tmp = names[idx]
+            names[idx] = names[smallestIdx]
+            names[smallestIdx] = tmp
 
+def printArray(names):
 
-a = func()
-a = a * a
-print a
+    for idx in range(len(names)):
+        print names[idx]
+
+names = [ 'Brandon', 'Hector', 'Ezio', 'Jorge', 'Maurice', 'Ryan', 'Darin', 'Erik', 'Dana', 'Joseph', 'Gabriel', 'Alexander', 'Christian', 'Nicholas', 'Tyler', 'Denver', 'Joshua', 'Dillon', 'Nathan', 'Alexandria', 'Evan', 'Charles', 'Elliot', 'Skyler', 'George', 'Spencer', 'Martin', 'Ryan', 'Matthew', 'Jevan', 'Sean', 'Johnathan', 'Marguerite' ]
+
+insertionSort(names)
+printArray(names)
+

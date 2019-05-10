@@ -61,7 +61,29 @@ Statements *Parser::statements() {
         } else if (tok.isName()) {
 
             Token lookahead = tokenizer.getToken();
-            if(lookahead.isOpenParen())
+            if(lookahead.isDotOperator()) // a.pop()
+            {
+                Token pushOrPop = tokenizer.getToken();
+                tokenizer.ungetToken();
+                if (pushOrPop.isPop())
+                {
+                    tokenizer.ungetToken();
+                    ArrayPop *popStmt = popStatement(tok);
+                    stmts->addStatement(popStmt);
+                    tok = tokenizer.getToken();
+                } else if (pushOrPop.isPush()) {
+                    tokenizer.ungetToken();
+                    ArrayPush *pushStmt = pushStatement(tok);
+                    stmts->addStatement(pushStmt);
+                    tok = tokenizer.getToken();
+                }
+            } else if (lookahead.isOpenSquareBracket()) {// a[5] = 2
+                tokenizer.ungetToken();
+                Subscription *sub = subAssign(tok);
+                stmts->addStatement(sub);
+                tok = tokenizer.getToken();
+            }
+            else if(lookahead.isOpenParen())
             {
                 tokenizer.ungetToken();
                 FunctionStatement* funcStmt =  new FunctionStatement(functionNode(tok));
@@ -90,6 +112,74 @@ Statements *Parser::statements() {
     }
     tokenizer.ungetToken();
     return stmts;
+}
+Subscription* Parser::subAssign(Token varName) {
+
+    Token openSB = tokenizer.getToken();
+    if (!openSB.isOpenSquareBracket())
+        die("Parser::subAssign", "Expected a [ token, instead got", openSB);
+
+    ExprNode* index = rel_expr();
+
+    Token closeSB = tokenizer.getToken();
+    if (!closeSB.isCloseSquareBracket())
+        die("Parser::subAssign", "Expected a ] token, instead got", closeSB);
+
+    Token assignOp = tokenizer.getToken();
+    if (!assignOp.isAssignmentOperator())
+        die("Parser::subAssign", "Expected a = , instead got", assignOp);
+
+    ExprNode *assignValue = rel_expr();
+
+    Token t = tokenizer.getToken();
+    if (!t.eol() && !t.eof()) {
+        die("Parser::subAssign", "Expected a new line, instead got", t);
+    }
+
+    return new Subscription(varName, index, assignValue);
+
+}
+ArrayPush *Parser::pushStatement(Token varName) {
+
+    Token push = tokenizer.getToken();
+    if (!push.isPush())
+        die("Parser::pushStatement", "Expected a push token, instead got", push);
+
+    Token openParen = tokenizer.getToken();
+    if (!openParen.isOpenParen())
+        die("Parser::pushStatement", "Expected an open Parenthesis token, instead got", openParen);
+
+    ExprNode *value = rel_expr();
+
+    Token closeParen = tokenizer.getToken();
+    if (!closeParen.isCloseParen())
+        die("Parser::pushStatement", "Expected a closed Parenthesis token, instead got", closeParen);
+
+    Token t = tokenizer.getToken();
+    if (!t.eol() && !t.eof()) {
+        die("Parser::pushStatement", "Expected a new line, instead got", t);
+    }
+    return new ArrayPush(varName, value);
+}
+ArrayPop *Parser::popStatement(Token name) {
+
+    Token pop = tokenizer.getToken();
+    if (!pop.isName())
+        die("Parser::popStatement", "Expected a pop token, instead got", pop);
+
+    Token openParen = tokenizer.getToken();
+    if (!openParen.isOpenParen())
+        die("Parser::popStatement", "Expected an open Parenthesis token, instead got", openParen);
+
+    Token closeParen = tokenizer.getToken();
+    if (!closeParen.isCloseParen())
+        die("Parser::popStatement", "Expected a closed Parenthesis token, instead got", closeParen);
+
+    Token t = tokenizer.getToken();
+    if (!t.eol() && !t.eof()) {
+        die("Parser::popStatement", "Expected a new line, instead got", t);
+    }
+    return new ArrayPop(name);
 }
 
 AssignmentStatement *Parser::assignStatement(Token tok) {
@@ -517,7 +607,19 @@ ExprNode *Parser::arith_primary() {
         p = new BooleanValue(tok);
     } else if (tok.isWholeNumber()) {
         p = new WholeNumber(tok);
-    } else if (tok.isName()) {
+    } else if (tok.isKeyword() && tok.getName() == "len"){
+        Token openParen = tokenizer.getToken();
+        if (!openParen.isOpenParen())
+            die("Parser::arith_primary", "Expected open-parenthesis, instead got", openParen);
+
+        Token tok = tokenizer.getToken();
+        p = new ArraySize(tok);
+
+        Token closeParen = tokenizer.getToken();
+        if (!closeParen.isCloseParen())
+            die("Parser::arith_primary", "Expected close-parenthesis, instead got", closeParen);
+
+    }else if (tok.isName()) {
         Token lookahead = tokenizer.getToken();
         if(lookahead.isOpenParen())
         {
@@ -525,7 +627,21 @@ ExprNode *Parser::arith_primary() {
             p=functionNode(tok);
 
         }
-        else {
+        else if(lookahead.isOpenSquareBracket())
+        {
+            // left off here for checking a = arr[3] + 5
+            p = rel_expr();
+            p = new Subscript(tok, p);
+
+            Token closeSB = tokenizer.getToken();
+            if (!closeSB.isCloseSquareBracket())
+                die("Parser::arith_primary", "Expected close-parenthesis, instead got", closeSB);
+
+        }
+
+
+
+        else{
             tokenizer.ungetToken();
             p = new Variable(tok);
         }
@@ -534,7 +650,18 @@ ExprNode *Parser::arith_primary() {
 
     else if (tok.isOpenSquareBracket())
     {
-        p = new Array(tok);
+        Token closeSB = tokenizer.getToken();
+        if (closeSB.isCloseSquareBracket()) {
+            p = new Array(nullptr);
+        }
+        else {
+            tokenizer.ungetToken();
+            p = new Array(arguments());
+
+            Token closeSB = tokenizer.getToken();
+            if (!closeSB.isCloseSquareBracket())
+                die("Parser::arith_primary", "Expected close Square Bracket, instead got", closeSB);
+        }
     }
     else if (tok.isOpenParen())
     {

@@ -47,12 +47,15 @@ public:
     bool isColon() const {return _symbol == ":";}
     bool isOpenSquareBracket() const {return _symbol == "[";}
     bool isCloseSquareBracket() const {return _symbol == "]";}
+    bool isDotOperator() const {return _symbol == ".";}
     bool isAnd() const {return _name == "and";}
     bool isOr() const {return _name == "or";}
     bool isNot() const {return _name == "not";}
+    bool isPop() const {return _name == "pop";}
+    bool isPush() const {return _name == "push";}
     bool isKeyword() const
     {
-        return _name == "for" || _name == "print" || _name == "if" || _name == "else" ||
+        return _name == "for" || _name == "print" || _name == "if" || _name == "else" || _name == "len" ||
                _name == "elif" || _name == "False" || _name == "True" || _name == "def" || _name == "return";
     }
 

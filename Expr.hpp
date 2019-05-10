@@ -87,6 +87,25 @@ public:
     virtual TypeDescriptor evaluate(SymTab &symTab);
 };
 
+class ArraySize: public ExprNode {
+public:
+    ArraySize(Token token);
+    virtual ~ArraySize();
+    virtual void print();
+    virtual TypeDescriptor evaluate(SymTab &symTab);
+};
+
+class Subscript: public ExprNode {
+public:
+    Subscript(Token token, ExprNode *index);
+    virtual ~Subscript();
+    virtual void print();
+    virtual TypeDescriptor evaluate(SymTab &symTab);
+
+private:
+    ExprNode *_index;
+};
+
 
 
 #endif //EXPRINTER_ARITHEXPR_HPP

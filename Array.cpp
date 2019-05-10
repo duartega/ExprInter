@@ -11,26 +11,34 @@
 #include "SymTab.hpp"
 
 
-// add array in TypeDescriptor (DONE), Expr (DONE), and parser.
+// add array in TypeDescriptor (DONE), Expr (DONE), parser, statements.
 
 class Array: public ExprNode {
 public:
-//    Array(Token token);
-    Array(Token token): ExprNode{token} {}
-    void print() {
-        token().print();
-    }
+
+    Array(Arguments * _args): ExprNode{Token()} {_arguments = _args;}
 
     TypeDescriptor evaluate(SymTab &symTab) {
-        if( ! symTab.isDefined(token().getName())) {
-            std::cout << "Use of undefined variable, " << token().getName() << std::endl;
-            exit(1);
+        std::vector<TypeDescriptor> ret;
+        if (_arguments) {
+            for (unsigned i = 0; i < _arguments->args()->size(); i++) {
+                TypeDescriptor e = _arguments->args()->at(i)->evaluate(symTab);
+                ret.push_back(e);
+            }
+            return TypeDescriptor(ret);
         }
-        return symTab.getValueFor(token().getName());
+        else
+            return TypeDescriptor(ret);
     }
+    void print()
+    {
+        for (unsigned i = 0; i < _arguments->args()->size(); i++)
+        {
+            ExprNode* e = _arguments->args()->at(i);
+            e->print();
+            std::cout << " ";
+        }
+    }
+private:
+    Arguments *_arguments;
 };
-
-
-
-
-
