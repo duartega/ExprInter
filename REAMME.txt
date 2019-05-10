@@ -1,8 +1,16 @@
+
+Names: Elliot Newman, Gabe Duarte, Marguerite Williams
+
 What Works:
 
-arrays are completely working
-functions are working with general return values and recursion
+arrays are completely working -- input1.txt , input2.txt
+functions are working with general return values and recursion -- input1.txt , input2.txt
 
 What Doesn't Work:
 
 return values within if statements or for loops will not break out of the functions
+
+Notes:
+
+running this on Clion works perfectly fine but running on BLUE with a make file crashes. Don't know why.
+Please test on CLion!

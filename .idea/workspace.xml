@@ -12,10 +12,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="934d530f-c456-4505-97f9-67e9301b8408" name="Default Changelist" comment="Merge branch 'master' of https://github.com/duartega/ExprInter&#10;&#10;# Conflicts:&#10;#&#9;.gitignore">
-      <change afterPath="$PROJECT_DIR$/REAMME.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/input1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/input2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inputExpressions.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/REAMME.txt" beforeDir="false" afterPath="$PROJECT_DIR$/REAMME.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,19 +38,24 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/input1.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
+            <state relative-caret-position="480">
               <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/REAMME.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="7" column="69" selection-start-line="7" selection-start-column="69" selection-end-line="7" selection-end-column="69" />
+            <state relative-caret-position="120">
+              <caret line="6" column="89" selection-start-line="6" selection-start-column="89" selection-end-line="6" selection-end-column="89" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/input2.txt">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -68,18 +72,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="133">
               <caret line="12" selection-start-line="12" selection-end-line="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Statements.hpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
-              <caret line="190" column="2" selection-start-line="190" selection-start-column="2" selection-end-line="190" selection-end-column="2" />
-              <folding>
-                <element signature="e#115#134#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -204,14 +196,14 @@
         <option value="$PROJECT_DIR$/Tokenizer.cpp" />
         <option value="$PROJECT_DIR$/TypeDescriptor.cpp" />
         <option value="$PROJECT_DIR$/Parser.cpp" />
-        <option value="$PROJECT_DIR$/REAMME.txt" />
         <option value="$PROJECT_DIR$/inputExpressions.txt" />
         <option value="$PROJECT_DIR$/input1.txt" />
+        <option value="$PROJECT_DIR$/REAMME.txt" />
       </list>
     </option>
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-35" />
     <option name="y" value="-20" />
     <option name="width" value="1920" />
@@ -260,7 +252,7 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ExprInter" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="input1.txt" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ExprInter" TARGET_NAME="ExprInter" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ExprInter" RUN_TARGET_NAME="ExprInter">
+    <configuration name="ExprInter" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="input2.txt" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ExprInter" TARGET_NAME="ExprInter" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ExprInter" RUN_TARGET_NAME="ExprInter">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -301,7 +293,7 @@
       <workItem from="1556142302480" duration="191000" />
       <workItem from="1556142518707" duration="1416000" />
       <workItem from="1556231106945" duration="146000" />
-      <workItem from="1557183420181" duration="29542000" />
+      <workItem from="1557183420181" duration="31212000" />
     </task>
     <task id="LOCAL-00001" summary=".gitignore">
       <created>1556142812129</created>
@@ -314,7 +306,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="312122000" />
+    <option name="totallyTimeSpent" value="313792000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -344,7 +336,7 @@
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="10" />
       <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49375" weight="0.44334278" />
-      <window_info active="true" anchor="bottom" id="Run" order="12" sideWeight="0.91822916" visible="true" weight="0.5084986" />
+      <window_info active="true" anchor="bottom" id="Run" order="12" sideWeight="0.91822916" visible="true" weight="0.19546743" />
       <window_info anchor="right" id="Database" order="0" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
@@ -698,6 +690,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/input1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/REAMME.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" column="89" selection-start-line="6" selection-start-column="89" selection-end-line="6" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Parser.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
@@ -705,19 +711,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/input1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/REAMME.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="69" selection-start-line="7" selection-start-column="69" selection-end-line="7" selection-end-column="69" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/input2.txt">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

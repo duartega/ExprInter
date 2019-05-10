@@ -1,0 +1,64 @@
+def Subtraction(a, b):
+    c = a - b
+    return c
+
+def Ops(a, b, c, d):
+    return a + b / c * d
+
+
+def Mod(a, b):
+    return a % b
+
+def tri_recursion(k):
+  if(k>0):
+    result = k+tri_recursion(k-1)
+    print(result)
+  else:
+    result = 0
+  return result
+
+# Python program to demonstrate Keyword Arguments
+def student(firstname, lastname):
+     print firstname, lastname
+
+def Compute(length):
+
+    # Compute the area of the square
+    square_area = length * length
+    circle_area = 3 * square_area
+    cube_volume = square_area * length
+    sphere_volume =  4/3 * 3 * cube_volume
+
+    print "The area of a square with side length ", length, " is ", square_area, "."
+    print "The area of a circle with radius length ", length, " is ", circle_area, "."
+    print "The volume of a cube with edge length ", length, " is ", cube_volume, "."
+    print "The volume of a sphere with radius length ", length, " is ", sphere_volume, "."
+
+
+
+def main():
+    d = Subtraction(5, 6)
+    print "Return of Subtraction: ", d
+
+    a = 2
+    b = 2
+    c = 3
+    d = 4
+    ret = Ops(a, b, c, d)
+    print "Testing the ops *, /, -, +: ", ret
+    print "Returning from Mod: ", Mod(10, 2)
+
+
+    print("Recursion Example Results")
+    tri_recursion(6)
+
+
+    # Keyword arguments
+    student('Geeks', 'Practice')
+    student('Practice', 'Geeks')
+
+    Compute(10)
+
+main()
+
+
